@@ -424,6 +424,7 @@ code {
 }
 
 .hero-lead code {
+  padding-inline: 3px;
   border-color: var(--hero-line);
   background: var(--hero-surface);
   color: var(--hero-ink);
@@ -1654,6 +1655,15 @@ pre code {
 
   .hero-lead {
     font-size: 15px;
+  }
+
+  .hero-facts {
+    display: grid;
+    gap: 6px;
+  }
+
+  .hero-facts li + li::before {
+    display: none;
   }
 
   .hero-actions .btn {
