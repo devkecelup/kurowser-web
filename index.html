@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kurowser v1.1.2: browser Windows berbasis Rust dan WebView2</title>
+  <title>Kurowser v1.1.3: browser Windows berbasis Rust dan WebView2</title>
   <meta name="description" content="Browser Windows berbasis Rust, Win32 native, dan Microsoft Edge WebView2. Tab Folders, pemblokir iklan Kurowser Shields, batas renderer LRU, serta halaman internal kurowser:// tanpa server localhost." />
   <meta name="theme-color" content="#0f1217" id="theme-color" />
   <link rel="icon" href="assets/kurowser.ico" sizes="any" />
@@ -71,7 +71,7 @@
         </a>
 
         <a class="btn btn-primary btn-sm header-download" href="#unduh">
-          <span class="label-long">Unduh v1.1.2</span>
+          <span class="label-long">Unduh v1.1.3</span>
           <span class="label-short">Unduh</span>
         </a>
 
@@ -87,17 +87,17 @@
     <div class="hero-band">
       <section class="container hero" id="top">
         <div class="hero-copy reveal reveal-hero">
-          <p class="release-line">v1.1.2 <span aria-hidden="true">/</span> Windows 10 &amp; 11 x64 <span aria-hidden="true">/</span> Graphite &amp; Paper</p>
+          <p class="release-line">v1.1.3 <span aria-hidden="true">/</span> Windows 10 &amp; 11 x64 <span aria-hidden="true">/</span> Graphite &amp; Paper</p>
           <h1>Browser Windows. <span class="accent-word">Ringan.</span> Fokus.</h1>
           <p class="hero-lead">
-            Rust + Win32 asli, engine WebView2 bawaan Windows. Rail 50px yang melebar halus saat hover, ad blocker aktif, auto-update SHA-256, 0 port localhost.
+            Rust + Win32 asli, engine WebView2 bawaan Windows. Bilah pencarian di tengah topbar, rail 50px yang melebar halus saat hover, ad blocker aktif, auto-update SHA-256, 0 port localhost.
           </p>
           <div class="hero-actions">
-            <a class="btn btn-primary btn-lg" id="hero-installer-btn" href="https://github.com/devkecelup/kurowser/releases/download/v1.1.2/KurowserSetup.exe">
+            <a class="btn btn-primary btn-lg" id="hero-installer-btn" href="https://github.com/devkecelup/kurowser/releases/download/v1.1.3/KurowserSetup.exe">
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
               Unduh installer (2.74 MB)
             </a>
-            <a class="btn btn-lg" id="hero-portable-btn" href="https://github.com/devkecelup/kurowser/releases/download/v1.1.2/kurowser.exe">Unduh versi portabel (1.84 MB)</a>
+            <a class="btn btn-lg" id="hero-portable-btn" href="https://github.com/devkecelup/kurowser/releases/download/v1.1.3/kurowser.exe">Unduh versi portabel (1.84 MB)</a>
           </div>
           <ul class="hero-facts">
             <li>Tanpa hak admin / UAC</li>
@@ -130,19 +130,6 @@
                     </button>
                   </div>
                 </div>
-
-                <div class="mock-addr-pill">
-                  <svg class="mock-lock-ico" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                  <span class="mock-url-text" id="mock-url">kurowser://start</span>
-                  <button type="button" class="mock-shield" id="mock-shield-toggle" aria-pressed="true" title="Toggle Kurowser Shields">
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                    <span id="mock-shield-label">ON</span>
-                  </button>
-                </div>
-
-                <button type="button" class="mock-rail-search" id="mock-rail-search" aria-label="Buka sidebar dan bilah pencarian" title="Cari atau masukkan URL (Ctrl+L)">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                </button>
 
                 <hr class="mock-rail-divider" aria-hidden="true" />
 
@@ -182,9 +169,6 @@
 
                 <div class="mock-rail-utils">
                   <hr class="mock-rail-divider" aria-hidden="true" />
-                  <button type="button" class="mock-rail-iconbtn" id="mock-rail-shield" aria-pressed="true" aria-label="Toggle Kurowser Shields" title="Kurowser Shields">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                  </button>
                   <button type="button" class="mock-rail-iconbtn" id="mock-rail-settings" aria-label="Buka Pengaturan Kurowser" title="Pengaturan (kurowser://settings)">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.08a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.08a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
                   </button>
@@ -205,7 +189,15 @@
 
               <div class="mock-stage">
                 <div class="mock-topbar">
-                  <span class="mock-stage-tabtitle" id="mock-stage-title">Kurowser Start</span>
+                  <span class="mock-topbar-spacer" aria-hidden="true"></span>
+                  <div class="mock-addr-pill">
+                    <svg class="mock-lock-ico" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <span class="mock-url-text" id="mock-url">kurowser://start</span>
+                    <button type="button" class="mock-shield" id="mock-shield-toggle" aria-pressed="true" title="Toggle Kurowser Shields">
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                      <span id="mock-shield-label">ON</span>
+                    </button>
+                  </div>
                   <div class="mock-win-controls" aria-hidden="true">
                     <span class="mock-win-glyph">
                       <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3"><line x1="2" y1="6" x2="10" y2="6"/></svg>
@@ -230,12 +222,12 @@
                     <button type="button" class="mock-link" data-link="YouTube">YouTube</button>
                     <button type="button" class="mock-link" data-link="Google">Google</button>
                   </div>
-                  <p class="mock-hint" id="mock-live-hint">Arahkan kursor ke <strong>rail kiri</strong> untuk melebarkan sidebar ke 240px, atau klik ikon kunci di kiri atas.</p>
+                  <p class="mock-hint" id="mock-live-hint">Bilah pencarian tetap berada di <strong>tengah topbar</strong>; arahkan kursor ke rail kiri untuk melebarkan sidebar ke 240px.</p>
                 </div>
               </div>
             </div>
           </div>
-          <p class="mock-caption mock-caption-live">Pratinjau interaktif antarmuka Kurowser v1.1.2. Default rail 50px melebar halus saat hover.</p>
+          <p class="mock-caption mock-caption-live">Pratinjau interaktif Kurowser v1.1.3. Pencarian di tengah topbar dengan rail 50px hover halus.</p>
           <noscript>
             <p class="mock-caption">Pratinjau statis. Aktifkan JavaScript untuk mencoba kontrol sidebar, folder, dan Shields.</p>
           </noscript>
@@ -245,12 +237,12 @@
       <section class="container measure reveal" aria-labelledby="measure-title">
         <div class="measure-head">
           <h2 id="measure-title">Hasil ukur di Windows x64</h2>
-          <p>Paket rilis v1.1.2 (<code>1.84 MB</code>); baseline memori diambil dengan <code>measure_memory.ps1</code> pada <code>kurowser://start</code> (v1.0.0).</p>
+          <p>Paket rilis v1.1.3 (<code>1.84 MB</code>); baseline memori diambil dengan <code>measure_memory.ps1</code> pada <code>kurowser://start</code> (v1.0.0).</p>
         </div>
         <dl class="measure-ledger">
           <div class="measure-item">
             <dt>Binary portabel</dt>
-            <dd><span class="measure-num">1.84</span> <span class="measure-unit">MB</span><span class="measure-note">kurowser.exe · 1,933,312 bytes</span></dd>
+            <dd><span class="measure-num">1.84</span> <span class="measure-unit">MB</span><span class="measure-note">kurowser.exe · 1,928,704 bytes</span></dd>
           </div>
           <div class="measure-item">
             <dt>Host Rust + Win32</dt>
@@ -279,9 +271,9 @@
         <article class="feature-main">
           <div class="feature-main-copy">
             <p class="feature-index">01</p>
-            <h3>Tab Folders dan rail 50px hover</h3>
+            <h3>Tab Folders, rail 50px, dan topbar tengah</h3>
             <p>
-              Kelompokkan tab ke dalam folder berwarna (Teal, Sky, Emerald, Amber, Slate, Rose), ubah nama langsung di sidebar (<code>Enter</code> simpan, <code>Esc</code> batal), dan pindahkan tab via drag and drop. Secara bawaan sidebar menyusut rapi menjadi rail <code>50px</code> dan otomatis melebar ke <code>240px</code> saat hover (bisa disematkan dengan <code>Ctrl + B</code> atau diatur di <code>kurowser://settings</code>).
+              Kelompokkan tab ke dalam folder berwarna (Teal, Sky, Emerald, Amber, Slate, Rose), ubah nama langsung di sidebar (<code>Enter</code> simpan, <code>Esc</code> batal), dan pindahkan tab via drag and drop. Secara bawaan sidebar menyusut rapi menjadi rail <code>50px</code> dan otomatis melebar ke <code>240px</code> saat hover (atau sematkan dengan <code>Ctrl + B</code>), sementara bilah pencarian, Kurowser Shields, dan bookmark terpasang stabil di tengah topbar <code>42px</code>.
             </p>
           </div>
 
@@ -333,7 +325,7 @@
       <header class="section-head">
         <p class="section-index"><span>02</span> Perbandingan</p>
         <h2>Jejak terukur dan perbandingan arsitektur.</h2>
-        <p>Ukuran paket diambil langsung dari berkas rilis Kurowser v1.1.2, sedangkan baseline memori diukur dengan <code>measure_memory.ps1</code> pada v1.0.0. Perbandingan antar browser membahas arsitektur engine dan fitur secara faktual tanpa mencantumkan angka RAM tebakan.</p>
+        <p>Ukuran paket diambil langsung dari berkas rilis Kurowser v1.1.3, sedangkan baseline memori diukur dengan <code>measure_memory.ps1</code> pada v1.0.0. Perbandingan antar browser membahas arsitektur engine dan fitur secara faktual tanpa mencantumkan angka RAM tebakan.</p>
       </header>
 
       <div class="panel">
@@ -365,11 +357,11 @@
 
       <div class="table-wrap" role="region" aria-label="Tabel perbandingan 7 browser" tabindex="0">
         <table>
-          <caption class="sr-only">Perbandingan arsitektur dan fitur antara Kurowser v1.1.2 dengan Brave, Microsoft Edge, Google Chrome, Mozilla Firefox, Zen Browser, dan Arc di Windows.</caption>
+          <caption class="sr-only">Perbandingan arsitektur dan fitur antara Kurowser v1.1.3 dengan Brave, Microsoft Edge, Google Chrome, Mozilla Firefox, Zen Browser, dan Arc di Windows.</caption>
           <thead>
             <tr>
               <th scope="col">Aspek</th>
-              <th scope="col" class="kurowser-col">Kurowser v1.1.2</th>
+              <th scope="col" class="kurowser-col">Kurowser v1.1.3</th>
               <th scope="col">Brave</th>
               <th scope="col">Microsoft Edge</th>
               <th scope="col">Google Chrome</th>
@@ -400,8 +392,8 @@
               <td>Chromium + Swift / WinUI</td>
             </tr>
             <tr>
-              <th scope="row">Bilah tab utama</th>
-              <td class="kurowser-col">Rail 50px default (hover halus ke 240px atau pin)</td>
+              <th scope="row">Bilah tab &amp; alamat</th>
+              <td class="kurowser-col">Rail 50px (hover halus ke 240px) + search tengah topbar</td>
               <td>Horizontal (opsi vertikal)</td>
               <td>Horizontal / Tab vertikal</td>
               <td>Horizontal</td>
@@ -488,12 +480,12 @@
           <div class="download-action">
             <dl class="file-meta">
               <div><dt>Berkas</dt><dd>KurowserSetup.exe</dd></div>
-              <div><dt>Ukuran</dt><dd><span id="setup-size">2.74 MiB (2,875,904 bytes)</span></dd></div>
+              <div><dt>Ukuran</dt><dd><span id="setup-size">2.74 MiB (2,871,296 bytes)</span></dd></div>
             </dl>
-            <a class="btn btn-primary btn-lg btn-block" id="card-installer-btn" href="https://github.com/devkecelup/kurowser/releases/download/v1.1.2/KurowserSetup.exe">Unduh installer (2.74 MB)</a>
+            <a class="btn btn-primary btn-lg btn-block" id="card-installer-btn" href="https://github.com/devkecelup/kurowser/releases/download/v1.1.3/KurowserSetup.exe">Unduh installer (2.74 MB)</a>
             <div class="hash-box">
               <span class="hash-label">SHA-256</span>
-              <code class="hash-text" id="sha-setup" data-hash="setup">F363B3E6B2698DEAEBCA3C9B4AEB6106524F7A527E4F58E5253162BC8C9F75CF</code>
+              <code class="hash-text" id="sha-setup" data-hash="setup">37BD578A1C766DEC4AD313C6A9F5D9BA9BA46B2B20783E89ACFEF2DB3D7EE692</code>
               <button type="button" class="btn btn-sm" data-copy-target="setup">Salin</button>
             </div>
           </div>
@@ -514,12 +506,12 @@
           <div class="download-action">
             <dl class="file-meta">
               <div><dt>Berkas</dt><dd>kurowser.exe</dd></div>
-              <div><dt>Ukuran</dt><dd><span id="portable-size">1.84 MiB (1,933,312 bytes)</span></dd></div>
+              <div><dt>Ukuran</dt><dd><span id="portable-size">1.84 MiB (1,928,704 bytes)</span></dd></div>
             </dl>
-            <a class="btn btn-lg btn-block" id="card-portable-btn" href="https://github.com/devkecelup/kurowser/releases/download/v1.1.2/kurowser.exe">Unduh versi portabel (1.84 MB)</a>
+            <a class="btn btn-lg btn-block" id="card-portable-btn" href="https://github.com/devkecelup/kurowser/releases/download/v1.1.3/kurowser.exe">Unduh versi portabel (1.84 MB)</a>
             <div class="hash-box">
               <span class="hash-label">SHA-256</span>
-              <code class="hash-text" id="sha-portable" data-hash="portable">CA8FDF6927415D118C5D56A83B3EA658E7BDB7A9202D7B4F16F1ACC8E226D360</code>
+              <code class="hash-text" id="sha-portable" data-hash="portable">6442A9DA9C047C15D035B71C26CD99C729880DD290DF544DBBB427DE5EBD061B</code>
               <button type="button" class="btn btn-sm" data-copy-target="portable">Salin</button>
             </div>
           </div>
@@ -540,7 +532,7 @@ Get-FileHash .\kurowser.exe -Algorithm SHA256</code></pre>
       <div class="footer-brand">
         <img src="assets/kurowser_logo.png" width="22" height="22" alt="" />
         <span class="footer-brand-name">Kurowser</span>
-        <span class="footer-brand-version">v1.1.2</span>
+        <span class="footer-brand-version">v1.1.3</span>
         <span class="footer-brand-license">MIT</span>
       </div>
 
@@ -553,8 +545,8 @@ Get-FileHash .\kurowser.exe -Algorithm SHA256</code></pre>
         </div>
         <div class="footer-nav-group">
           <p class="footer-nav-title">Unduh</p>
-          <a href="https://github.com/devkecelup/kurowser/releases/download/v1.1.2/KurowserSetup.exe">Installer (2.74 MB)</a>
-          <a href="https://github.com/devkecelup/kurowser/releases/download/v1.1.2/kurowser.exe">Portabel (1.84 MB)</a>
+          <a href="https://github.com/devkecelup/kurowser/releases/download/v1.1.3/KurowserSetup.exe">Installer (2.74 MB)</a>
+          <a href="https://github.com/devkecelup/kurowser/releases/download/v1.1.3/kurowser.exe">Portabel (1.84 MB)</a>
           <a href="#unduh">SHA-256 &amp; opsi</a>
         </div>
         <div class="footer-nav-group">
