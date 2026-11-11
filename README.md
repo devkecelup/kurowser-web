@@ -1,7 +1,8 @@
 # Kurowser Download Portal
 
-Website resmi distribusi **Kurowser** (`KurowserSetup.exe` Windows Installer & `kurowser.exe` Portable) yang di-host terpisah dari repositori source code browser.
+Website resmi distribusi Kurowser (`KurowserSetup.exe` Windows Installer `2.60 MB` dan `kurowser.exe` Portabel `1.74 MB`) yang di-host terpisah dari repositori source code browser.
 
-- **Website Resmi (GitHub Pages):** https://devkecelup.github.io/kurowser-web/
-- **Source Code & Releases Kurowser:** https://github.com/devkecelup/kurowser
-- **Stack:** Static HTML5 + CSS3 + Vanilla JS (bundled `Poppins` fonts & SVG icons, tanpa dependensi eksternal).
+- Portal Resmi (GitHub Pages): https://devkecelup.github.io/kurowser-web/
+- Source Code dan Releases Kurowser: https://github.com/devkecelup/kurowser
+- Stack antarmuka: HTML5, CSS3, Vanilla JS, palet **Graphite** dan **Paper** dengan aksen **Teal**, serta font self-hosted **Poppins** (`assets/fonts/`) dan **Cascadia Mono** agar selaras dengan antarmuka aplikasi Kurowser v1.0.0.
+- Arah desain: [`DESIGN.md`](DESIGN.md)
