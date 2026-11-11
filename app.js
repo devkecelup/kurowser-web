@@ -1,13 +1,13 @@
 (() => {
   const RELEASE_META = {
-    version: "v1.1.1",
+    version: "v1.1.2",
     setup: {
-      sizeLabel: "2.73 MiB (2,866,176 bytes)",
-      sha256: "862EDEC815C274D9FF2C9CABDD584DE9B1FDBA3E1231ACC642D4A5A0A4D195A6",
+      sizeLabel: "2.74 MiB (2,875,904 bytes)",
+      sha256: "F363B3E6B2698DEAEBCA3C9B4AEB6106524F7A527E4F58E5253162BC8C9F75CF",
     },
     portable: {
-      sizeLabel: "1.83 MiB (1,923,072 bytes)",
-      sha256: "E202BFB6BDAA99DBDF45D71320ABFB3D67A5E219D4F28951D512C654DE16AA1B",
+      sizeLabel: "1.84 MiB (1,933,312 bytes)",
+      sha256: "CA8FDF6927415D118C5D56A83B3EA658E7BDB7A9202D7B4F16F1ACC8E226D360",
     },
   };
 
@@ -272,7 +272,7 @@
         hoverEnterTimer = window.setTimeout(() => {
           sidebarHoverOpen = true;
           syncSidebarLayout(false);
-        }, 110);
+        }, 45);
       }
     });
 
@@ -283,7 +283,7 @@
         sidebarHoverOpen = false;
         sidebarHoldOpen = false;
         syncSidebarLayout(false);
-      }, 180);
+      }, 160);
     });
 
     mockSidebar.addEventListener("focusout", (event) => {
@@ -375,7 +375,7 @@
   syncSidebarLayout(false);
   syncActiveState(activeState, false);
 
-  // Honest comparison panel: baseline measured memory, exact v1.1.1 release sizes, and factual 7-browser architecture
+  // Honest comparison panel: baseline measured memory, exact v1.1.2 release sizes, and factual 7-browser architecture
   const METRIC_PANELS = {
     mem: {
       kind: "bars",
@@ -393,14 +393,14 @@
     },
     size: {
       kind: "bars",
-      title: "Ukuran paket rilis resmi Kurowser v1.1.1 (MB)",
+      title: "Ukuran paket rilis resmi Kurowser v1.1.2 (MB)",
       sub: "Ukuran aktual berkas executable Windows x64 tanpa paket browser engine terbundel.",
       max: 4,
       unit: "MB",
-      note: "Portable kurowser.exe (1.83 MB / 1,923,072 bytes) dan installer KurowserSetup.exe (2.73 MB / 2,866,176 bytes) berukuran kecil karena memanfaatkan Microsoft Edge WebView2 Runtime yang sudah tersedia di Windows 10 dan Windows 11.",
+      note: "Portable kurowser.exe (1.84 MB / 1,933,312 bytes) dan installer KurowserSetup.exe (2.74 MB / 2,875,904 bytes) berukuran kecil karena memanfaatkan Microsoft Edge WebView2 Runtime yang sudah tersedia di Windows 10 dan Windows 11.",
       rows: [
-        { name: "kurowser.exe (Portabel)", val: 1.83, kurowser: true },
-        { name: "KurowserSetup.exe (Installer)", val: 2.73, kurowser: true },
+        { name: "kurowser.exe (Portabel)", val: 1.84, kurowser: true },
+        { name: "KurowserSetup.exe (Installer)", val: 2.74, kurowser: true },
       ],
     },
     arch: {
@@ -410,9 +410,9 @@
       note: "Untuk detail perbandingan lengkap antar fitur, lihat tabel 7 browser di bawah.",
       items: [
         {
-          name: "Kurowser v1.1.1",
+          name: "Kurowser v1.1.2",
           tag: "WebView2 OS · Rust Win32",
-          detail: "Rail 50px default (melebar ke 240px saat hover atau pin) + Tab Folders, tombol kanan atas, Kurowser Shields ON bawaan, LRU Cap 2 sampai 4 renderer, auto-updater SHA-256, dan skema kurowser:// tanpa localhost.",
+          detail: "Rail 50px default (melebar halus ke 240px saat hover atau pin) + Tab Folders, tombol kanan atas, Kurowser Shields ON bawaan, LRU Cap 2 sampai 4 renderer, auto-updater SHA-256, dan skema kurowser:// tanpa localhost.",
           kurowser: true,
         },
         {
