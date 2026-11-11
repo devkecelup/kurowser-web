@@ -1,13 +1,13 @@
 (() => {
   const RELEASE_META = {
-    version: "v1.0.0",
+    version: "v1.1.0",
     setup: {
-      sizeLabel: "2.60 MiB (2,729,984 bytes)",
-      sha256: "B5C09DC4FD45C006256A8A71A7B2ABA29A226869D4A6ACC2053FA176431C510D",
+      sizeLabel: "2.73 MiB (2,859,008 bytes)",
+      sha256: "D5B85CF722FB38513EF9A9048E43B98C9E140824E60AD06524D12D650C73948D",
     },
     portable: {
-      sizeLabel: "1.74 MiB (1,827,328 bytes)",
-      sha256: "D09F2D855550B5EEA5BBA04DBC62F7C6AA8080903B7FE1F3D4F0F5035E2CB619",
+      sizeLabel: "1.83 MiB (1,916,416 bytes)",
+      sha256: "182D3861B976C2FA32BA9D45959C3B17B07257DEF14B81F9C760BEB8B7D7AA0C",
     },
   };
 
@@ -289,15 +289,15 @@
 
   syncActiveState(activeState, false);
 
-  // Honest comparison panel: real measured memory, real release sizes, and factual 7-browser architecture
+  // Honest comparison panel: baseline measured memory, exact v1.1.0 release sizes, and factual 7-browser architecture
   const METRIC_PANELS = {
     mem: {
       kind: "bars",
-      title: "Jejak memori terukur Kurowser pada kurowser://start (MB)",
+      title: "Jejak memori baseline Kurowser pada kurowser://start (MB)",
       sub: "Satuan MB Windows (1024 x 1024 byte). Nilai lebih kecil berarti jejak lebih hemat.",
       max: 420,
       unit: "MB",
-      note: "Diukur langsung di Windows memakai measure_memory.ps1 pada sesi bersih kurowser://start: proses host kurowser.exe memakan 6.47 MB Private (34.86 MB Working Set) dan total pohon bersama 6 sub-proses msedgewebview2 sebesar 185.87 MB Private (386.74 MB Working Set).",
+      note: "Baseline diukur langsung di Windows memakai measure_memory.ps1 pada sesi bersih kurowser://start (v1.0.0): proses host kurowser.exe memakan 6.47 MB Private (34.86 MB Working Set) dan total pohon bersama 6 sub-proses msedgewebview2 sebesar 185.87 MB Private (386.74 MB Working Set).",
       rows: [
         { name: "Host Rust + Win32 (Private)", val: 6.47, kurowser: true },
         { name: "Host Rust + Win32 (Working Set)", val: 34.86, kurowser: true },
@@ -307,14 +307,14 @@
     },
     size: {
       kind: "bars",
-      title: "Ukuran paket rilis resmi Kurowser v1.0.0 (MB)",
+      title: "Ukuran paket rilis resmi Kurowser v1.1.0 (MB)",
       sub: "Ukuran aktual berkas executable Windows x64 tanpa paket browser engine terbundel.",
       max: 4,
       unit: "MB",
-      note: "Portable kurowser.exe (1.74 MB / 1,827,328 bytes) dan installer KurowserSetup.exe (2.60 MB / 2,729,984 bytes) berukuran kecil karena memanfaatkan Microsoft Edge WebView2 Runtime yang sudah tersedia di Windows 10 dan Windows 11.",
+      note: "Portable kurowser.exe (1.83 MB / 1,916,416 bytes) dan installer KurowserSetup.exe (2.73 MB / 2,859,008 bytes) berukuran kecil karena memanfaatkan Microsoft Edge WebView2 Runtime yang sudah tersedia di Windows 10 dan Windows 11.",
       rows: [
-        { name: "kurowser.exe (Portabel)", val: 1.74, kurowser: true },
-        { name: "KurowserSetup.exe (Installer)", val: 2.60, kurowser: true },
+        { name: "kurowser.exe (Portabel)", val: 1.83, kurowser: true },
+        { name: "KurowserSetup.exe (Installer)", val: 2.73, kurowser: true },
       ],
     },
     arch: {
@@ -324,9 +324,9 @@
       note: "Untuk detail perbandingan lengkap antar fitur, lihat tabel 7 browser di bawah.",
       items: [
         {
-          name: "Kurowser v1.0.0",
+          name: "Kurowser v1.1.0",
           tag: "WebView2 OS · Rust Win32",
-          detail: "Sidebar 280px/72px + Tab Folders, tombol kanan atas, Kurowser Shields ON bawaan, LRU Cap 2 sampai 4 renderer, dan skema kurowser:// tanpa localhost.",
+          detail: "Sidebar 280px/72px + Tab Folders, tombol kanan atas, Kurowser Shields ON bawaan, LRU Cap 2 sampai 4 renderer, auto-updater SHA-256, dan skema kurowser:// tanpa localhost.",
           kurowser: true,
         },
         {
@@ -534,28 +534,53 @@
 
   // Scroll-reveal (MOTION 2)
   // Purpose: guide reading flow; elements fade-in-up as they enter the viewport.
-  // Hero elements use CSS animation (immediate on load). Sections use IntersectionObserver.
+  // Above-the-fold and scrolled-past elements (e.g. URL hash navigation) show immediately.
   // All transitions are disabled when prefers-reduced-motion: reduce is set.
-  if (typeof IntersectionObserver !== "undefined") {
+  const revealItems = Array.from(
+    document.querySelectorAll(".reveal:not(.reveal-hero):not(.reveal-hero-product)")
+  );
+  const markVisible = (el) => el.classList.add("is-visible");
+
+  if (typeof IntersectionObserver !== "undefined" && revealItems.length > 0) {
+    const revealVisibleInViewport = () => {
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      for (const el of revealItems) {
+        if (el.classList.contains("is-visible")) continue;
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= vh * 0.96) {
+          markVisible(el);
+        }
+      }
+      if (revealItems.every((el) => el.classList.contains("is-visible"))) {
+        window.removeEventListener("scroll", revealVisibleInViewport);
+        window.removeEventListener("hashchange", revealVisibleInViewport);
+      }
+    };
+
+    revealVisibleInViewport();
+
     const revealObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
+          if (entry.isIntersecting || entry.boundingClientRect.top <= window.innerHeight) {
+            markVisible(entry.target);
             revealObserver.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.01, rootMargin: "0px 0px -12px 0px" }
     );
 
-    document.querySelectorAll(".reveal:not(.reveal-hero):not(.reveal-hero-product)").forEach((el) => {
-      revealObserver.observe(el);
+    revealItems.forEach((el) => {
+      if (!el.classList.contains("is-visible")) {
+        revealObserver.observe(el);
+      }
     });
+
+    document.documentElement.classList.add("js-reveal");
+    window.addEventListener("scroll", revealVisibleInViewport, { passive: true });
+    window.addEventListener("hashchange", revealVisibleInViewport, { passive: true });
   } else {
-    // Fallback: show all without animation
-    document.querySelectorAll(".reveal").forEach((el) => {
-      el.classList.add("is-visible");
-    });
+    revealItems.forEach(markVisible);
   }
 })();

@@ -1757,15 +1757,15 @@ pre code {
 
 /* Scroll-reveal animations (MOTION 2) */
 /*
-  Purpose: entrance animations guide reading flow — hero copy on load (staggered),
+  Purpose: entrance animations guide reading flow: hero copy on load (staggered),
   sections reveal on scroll via IntersectionObserver (threshold 0.15, once).
   All motion is disabled under prefers-reduced-motion: reduce.
-  No loops, no pulses — only one-shot entrance transitions.
+  No loops, no pulses: only one-shot entrance transitions.
 */
 @keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(22px);
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
@@ -1774,10 +1774,13 @@ pre code {
 }
 
 .reveal {
+  transition: opacity 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html.js-reveal .reveal:not(.is-visible) {
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(14px);
 }
 
 .reveal.is-visible {
@@ -1786,14 +1789,14 @@ pre code {
 }
 
 .reveal-hero {
-  animation: fadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+  animation: fadeUp 0.48s cubic-bezier(0.22, 1, 0.36, 1) 0s both;
   opacity: 1;
   transform: none;
   transition: none;
 }
 
 .reveal-hero-product {
-  animation: fadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.28s both;
+  animation: fadeUp 0.52s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
   opacity: 1;
   transform: none;
   transition: none;
@@ -2251,6 +2254,11 @@ pre code {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   *,

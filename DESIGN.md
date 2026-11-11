@@ -1,6 +1,6 @@
 # DESIGN.md
 
-Arah visual untuk portal unduh Kurowser (`kurowser-web`). Dokumen ini menyelaraskan situs unduh dengan tema dan tata letak aplikasi desktop Kurowser v1.0.0 saat ini (`ThemePreset::Graphite`, `ThemePreset::Paper`, tipografi Poppins, bilah pencarian sidebar, dan tombol kontrol jendela di kanan atas). Setiap keputusan besar punya alasan satu baris (R-31).
+Arah visual untuk portal unduh Kurowser (`kurowser-web`). Dokumen ini menyelaraskan situs unduh dengan tema dan tata letak aplikasi desktop Kurowser v1.1.0 saat ini (`ThemePreset::Graphite`, `ThemePreset::Paper`, tipografi Poppins, bilah pencarian sidebar, dan tombol kontrol jendela di kanan atas). Setiap keputusan besar punya alasan satu baris (R-31).
 
 ## Design Read
 
@@ -67,22 +67,22 @@ Seluruh token diambil langsung dari `ThemePalette::Graphite` (bawaan aplikasi) d
 
 ## Tata Letak dan Pratinjau Produk
 
-- **Band pembuka Graphite / Paper (`0.94fr / 1.06fr`)**: teks dan CTA di kiri, pratinjau interaktif antarmuka Kurowser v1.0.0 terbaru di kanan, diikuti ledger angka terukur. Pratinjau menampilkan tata letak terbaru aplikasi: bilah pencarian dan Kurowser Shields berada di dalam sidebar kiri (`280px`, bisa dilipat ke mode rail), sedangkan tombol `Minimize`, `Maximize/Restore`, dan `Close` berada di pojok kanan atas bilah `36px` di atas bingkai konten membulat.
+- **Band pembuka Graphite / Paper (`0.94fr / 1.06fr`)**: teks dan CTA di kiri, pratinjau interaktif antarmuka Kurowser v1.1.0 terbaru di kanan, diikuti ledger angka terukur. Pratinjau menampilkan tata letak terbaru aplikasi: bilah pencarian dan Kurowser Shields berada di dalam sidebar kiri (`280px`, bisa dilipat ke mode rail), sedangkan tombol `Minimize`, `Maximize/Restore`, dan `Close` berada di pojok kanan atas bilah `36px` di atas bingkai konten membulat.
 - **Bagian Fitur (`1 baris utama + 3 kolom pendukung`)**: Tab Folders mendapat penjelasan dan sketsa vertikal teal; tiga komponen lainnya (Kurowser Shields, LRU RAM Cap, dan skema `kurowser://` tanpa localhost) tampil sebagai tiga kolom sejajar di desktop, lalu bertumpuk bersih di perangkat seluler.
 - **Bagian Perbandingan (jujur tanpa angka tebakan)**: panel interaktif memiliki tab untuk melihat metrik memori terukur Kurowser, ukuran berkas rilis, serta peta arsitektur 7 browser, diikuti tabel perbandingan lengkap lintas browser (Chromium/WebView2/Gecko) tanpa angka RAM pihak ketiga yang tidak diukur di repositori ini.
-- **Manifest Unduhan (`#unduh`)**: dua baris unduhan (`KurowserSetup.exe` `2.60 MiB` dan `kurowser.exe` `1.74 MiB`) lengkap dengan SHA-256 aktual dan perintah verifikasi PowerShell.
+- **Manifest Unduhan (`#unduh`)**: dua baris unduhan (`KurowserSetup.exe` `2.73 MiB` dan `kurowser.exe` `1.83 MiB`) lengkap dengan SHA-256 aktual dan perintah verifikasi PowerShell.
 - Radius `4px`, `6px`, dan `10px` (atau `12px` bingkai jendela pratinjau agar selaras dengan sudut WebView2 aplikasi). Tidak ada gradient latar dekoratif, glow menyebar, background grid, atau glassmorphism.
 - Elevasi bayangan `--shadow` hanya dipakai pada bingkai jendela pratinjau desktop dan laci navigasi seluler yang melayang di atas konten agar hierarki fokus jelas, bukan pada setiap kartu.
 - Ikon SVG fungsional terbatas pada kontrol nyata (ikon K Kurowser, gembok `kurowser://`, Shield, lipat rail, kontrol jendela kanan atas, matahari/bulan tema, unduh installer, serta ikon `Hemat RAM` yang mencerminkan tombol asli di sidebar Kurowser).
 
-## Data Terukur Kurowser v1.0.0
+## Data Terukur Kurowser
 
-Seluruh angka di halaman diambil langsung dari artefak rilis dan skrip [`measure_memory.ps1`](https://github.com/devkecelup/kurowser/blob/main/measure_memory.ps1):
+Ukuran paket diambil langsung dari artefak rilis `v1.1.0`, sedangkan baseline memori diukur dengan skrip [`measure_memory.ps1`](https://github.com/devkecelup/kurowser/blob/main/measure_memory.ps1) pada sesi bersih `kurowser://start` (`v1.0.0`):
 
-- Binary portabel `kurowser.exe`: `1.74 MB` (`1.74 MiB`, `1,827,328 bytes`).
-- Installer `KurowserSetup.exe`: `2.60 MB` (`2.60 MiB`, `2,729,984 bytes`).
-- Host Rust + Win32 pada `kurowser://start`: `6.47 MB` Private (`34.86 MB` Working Set).
-- Pohon proses lengkap saat start (`kurowser.exe` + 6 sub-proses `msedgewebview2`): `185.87 MB` Private (`386.74 MB` Working Set).
+- Binary portabel `kurowser.exe` (`v1.1.0`): `1.83 MB` (`1.83 MiB`, `1,916,416 bytes`).
+- Installer `KurowserSetup.exe` (`v1.1.0`): `2.73 MB` (`2.73 MiB`, `2,859,008 bytes`).
+- Host Rust + Win32 pada `kurowser://start` (baseline `v1.0.0`): `6.47 MB` Private (`34.86 MB` Working Set).
+- Pohon proses lengkap saat start (`kurowser.exe` + 6 sub-proses `msedgewebview2`, baseline `v1.0.0`): `185.87 MB` Private (`386.74 MB` Working Set).
 - Listener `localhost`: `0` port (`skema kurowser://`).
 
 ## Gerak dan Aksesibilitas
