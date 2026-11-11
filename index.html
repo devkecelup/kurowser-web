@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kurowser — Unduh Browser Windows Ultra-Ringan (~1.77 MB)</title>
+  <meta name="description" content="Kurowser adalah browser Windows berbasis Rust + Native Win32 + WebView2 dengan Tab Folders, Kurowser Shields Ad Blocker, LRU RAM Cap ketat, dan zero localhost." />
+  <meta name="theme-color" content="#0b0c12" />
+  <link rel="icon" href="assets/kurowser.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="assets/kurowser_logo.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a class="brand" href="#top">
+        <img src="assets/kurowser_logo.png" alt="Logo Kurowser" />
+        <span>Kurowser</span>
+      </a>
+      <nav class="nav-links" aria-label="Navigasi Utama">
+        <a href="#fitur">Fitur</a>
+        <a href="#perbandingan">Perbandingan</a>
+        <a href="#unduh">Unduh</a>
+        <a href="https://github.com/devkecelup/kurowser/blob/main/SECURITY.md" target="_blank" rel="noopener">Keamanan</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-ghost btn-sm" href="https://github.com/devkecelup/kurowser" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.11.78-.25.78-.55v-1.94c-3.2.7-3.87-1.54-3.87-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a10.98 10.98 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.76.11 3.05.73.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.39-5.25 5.67.41.35.78 1.05.78 2.13v3.15c0 .31.21.67.79.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+          Source Code
+        </a>
+        <a class="btn btn-primary btn-sm" href="#unduh">Unduh v1.0.0</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="container hero">
+      <div>
+        <div class="pill">
+          <span class="dot"></span>
+          Rilis Stabil v1.0.0 · Windows 10/11 x64
+        </div>
+        <h1>
+          Browser Windows <span class="grad">Ultra-Ringan</span> untuk Fokus &amp; Hemat RAM.
+        </h1>
+        <p class="hero-lead">
+          Dibangun dengan <strong>Rust + Native Win32 GDI + WebView2</strong>. Hadir dengan <strong>Tab Folders</strong> vertikal, <strong>Kurowser Shields</strong> pemblokir iklan bawaan, batas memori <strong>LRU Cap</strong> ketat, dan arsitektur aman <code>kurowser://</code> tanpa server <code>localhost</code>.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary btn-lg" id="hero-installer-btn" href="https://github.com/devkecelup/kurowser/releases/download/v1.0.0/KurowserSetup.exe">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Unduh Installer (Windows x64)
+          </a>
+          <a class="btn btn-lg" id="hero-portable-btn" href="https://github.com/devkecelup/kurowser/releases/download/v1.0.0/kurowser.exe">
+            Versi Portable (1.77 MB)
+          </a>
+        </div>
+        <div class="hero-subnote">
+          <span>Tanpa hak Admin / UAC</span>
+          <span>·</span>
+          <span>MIT Open Source</span>
+          <span>·</span>
+          <a href="#unduh">Lihat SHA-256 &amp; opsi instalasi</a>
+        </div>
+      </div>
+
+      <div class="mockup-frame" aria-label="Pratinjau Antarmuka Interaktif Kurowser">
+        <div class="mockup-top">
+          <div class="win-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="mock-addr">
+            <div class="mock-addr-left">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.2" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <span id="mock-url">kurowser://start</span>
+            </div>
+            <button type="button" class="mock-shield-btn" id="mock-shield-toggle" title="Klik untuk coba toggle Kurowser Shields">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span id="mock-shield-label">Shields ON · 2</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="mockup-body">
+          <aside class="mock-sidebar">
+            <div class="mock-cta-row">
+              <button type="button" class="mock-pill" id="mock-newtab">+ New Tab</button>
+              <button type="button" class="mock-pill" id="mock-toggle-all" title="Collapse/Expand Folder">Folder</button>
+            </div>
+
+            <button type="button" class="mock-folder-btn" id="mock-folder-btn" aria-expanded="true">
+              <span><span id="mock-folder-arrow">▾</span> Workspace Ku</span>
+              <span id="mock-folder-count" style="color: var(--accent-bright); font-size: 11px;">2</span>
+            </button>
+
+            <div class="mock-folder-children" id="mock-folder-children">
+              <div class="mock-tab active" role="button" tabindex="0" data-url="kurowser://start" data-shields="0">kurowser://start</div>
+              <div class="mock-tab" role="button" tabindex="0" data-url="https://github.com/devkecelup/kurowser" data-shields="2">GitHub · Kurowser</div>
+            </div>
+
+            <div class="mock-tab" role="button" tabindex="0" data-url="https://duckduckgo.com" data-shields="4">DuckDuckGo</div>
+            <div class="mock-tab" role="button" tabindex="0" data-url="kurowser://settings" data-shields="0">Pengaturan</div>
+
+            <div class="mock-sb-foot">
+              <span>Live 3/3</span>
+              <span>Hemat RAM</span>
+            </div>
+          </aside>
+
+          <div class="mock-page">
+            <div class="mock-logo-row">
+              <img src="assets/kurowser_logo.png" alt="Kurowser" />
+              <span>Kurowser</span>
+            </div>
+            <div class="mock-search" id="mock-search-preview">Cari di Web atau ketik URL...</div>
+            <div class="mock-links">
+              <div class="mock-link-tile">GitHub</div>
+              <div class="mock-link-tile">YouTube</div>
+              <div class="mock-link-tile">Docs</div>
+            </div>
+            <div class="mock-hint" id="mock-live-hint">
+              Klik folder <strong>Workspace Ku</strong> atau tombol <strong>Shields</strong> di atas untuk pratinjau interaktif.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container stats-strip" aria-label="Metrik Performa Terverifikasi">
+      <div class="stat-card">
+        <div class="stat-val">1.77 MB</div>
+        <div class="stat-lbl">Ukuran Portable Binary (<code>kurowser.exe</code>)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">7.5 MB</div>
+        <div class="stat-lbl">Jejak Host RAM (Rust + Win32)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">171.7 MB</div>
+        <div class="stat-lbl">Total Private RAM saat Start (Windows 11)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">0 Port</div>
+        <div class="stat-lbl">Zero <code>localhost</code> Listener Terbuka</div>
+      </div>
+    </section>
+
+    <section class="container section" id="fitur">
+      <div class="sec-head">
+        <div class="sec-tag">Arsitektur &amp; Fitur</div>
+        <h2>Dirancang Ringan Tanpa Mengorbankan Kenyamanan</h2>
+        <p>Setiap komponen dibangun ulang dengan fokus performa, privasi jaringan, dan kerapian ruang kerja Anda.</p>
+      </div>
+
+      <div class="grid-2">
+        <article class="card">
+          <div class="icon-badge">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3>Tab Folders &amp; Sidebar Vertikal</h3>
+          <p>Kelompokkan tab ke dalam folder berwarna kustom lengkap dengan <em>inline rename</em>, drag-and-drop antar folder, collapse/expand, context menu, dan penyimpanan otomatis ke <code>folders.json</code> (lazy-load 0 MB RAM hingga diklik).</p>
+        </article>
+
+        <article class="card">
+          <div class="icon-badge">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <h3>Kurowser Shields (Ad &amp; Tracker Blocker)</h3>
+          <p>Aktif secara default untuk memblokir domain iklan, tracker, telemetry, dan popunder langsung di level jaringan WebView2 sebelum request terkirim, ditambah penyembunyian elemen iklan kosmetik (CSS) dan toggle per-situs.</p>
+        </article>
+
+        <article class="card">
+          <div class="icon-badge">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/></svg>
+          </div>
+          <h3>LRU RAM Cap &amp; Tombol Hemat RAM</h3>
+          <p>Membatasi renderer aktif hanya 2–4 tab (default 3). Tab yang paling lama tidak dipakai otomatis ditidurkan dan dimuat kembali seketika saat dibuka, menjaga laptop 4–8 GB atau sesi gaming tetap mulus.</p>
+        </article>
+
+        <article class="card">
+          <div class="icon-badge">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h3>Zero Localhost (<code>kurowser://</code> COM Isolation)</h3>
+          <p>Seluruh halaman internal dilayani langsung dari memori melalui Custom Scheme WebView2 dengan <code>BCryptGenRandom</code> session token, per-page CSP nonce, dan proteksi navigasi lintas-origin. Tidak ada port lokal yang diekspos.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="container section" id="perbandingan">
+      <div class="sec-head">
+        <div class="sec-tag">Benchmark &amp; Matriks</div>
+        <h2>Perbandingan RAM, Ukuran, dan Fitur</h2>
+        <p>Bandingkan efisiensi memori, ukuran distribusi, serta kelengkapan fitur Kurowser dengan browser desktop populer lainnya di Windows x64.</p>
+      </div>
+
+      <div class="panel">
+        <div class="chart-head">
+          <div>
+            <strong id="chart-title" style="font-size: 16px;">Private RAM — 4 Tab Aktif incl. GitHub + Settings (MB, Lebih Kecil Lebih Hemat)</strong>
+          </div>
+          <div class="chart-tabs" role="tablist" aria-label="Pilih Metrik Diagram">
+            <button type="button" class="chart-tab active" data-metric="ram4">RAM 4 Tab (MB)</button>
+            <button type="button" class="chart-tab" data-metric="ram1">RAM 1 Tab Idle (MB)</button>
+            <button type="button" class="chart-tab" data-metric="size">Ukuran Distribusi (MB)</button>
+          </div>
+        </div>
+
+        <div class="bars" id="chart-bars"></div>
+
+        <p class="chart-note" id="chart-note">
+          Data Kurowser Start (171.7 MB Private) dan Kurowser 4 Tab incl. GitHub + Settings + LRU Cap 3/3 (498.7 MB Private, Rust host 7.5 MB) diukur langsung pada Windows 11 x64 menggunakan <code>measure_memory.ps1</code>. Angka browser lain merupakan baseline estimasi umum Windows x64 tanpa LRU Cap ketat.
+        </p>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Aspek / Fitur</th>
+              <th>Kurowser v1.0.0</th>
+              <th>Brave</th>
+              <th>Microsoft Edge</th>
+              <th>Google Chrome</th>
+              <th>Mozilla Firefox</th>
+              <th>Zen Browser</th>
+              <th>Arc (Windows)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight">
+              <td><strong>Ukuran Executable / Base</strong></td>
+              <td><span class="badge-yes">~1.77 MB</span> (WebView2 OS)</td>
+              <td>~350+ MB</td>
+              <td>Bawaan OS + layanan</td>
+              <td>~350+ MB</td>
+              <td>~250+ MB</td>
+              <td>~270+ MB</td>
+              <td>~450+ MB</td>
+            </tr>
+            <tr class="highlight">
+              <td><strong>Stack UI Host</strong></td>
+              <td><strong>Rust + Win32 GDI Native</strong></td>
+              <td>Chromium UI</td>
+              <td>Chromium UI</td>
+              <td>Chromium UI</td>
+              <td>Gecko / XUL</td>
+              <td>Gecko / CSS Mod</td>
+              <td>Chromium + Swift/WinUI</td>
+            </tr>
+            <tr class="highlight">
+              <td><strong>Tab Folders Vertikal</strong></td>
+              <td><span class="badge-yes">Ya</span> (Warna, Collapse, DnD)</td>
+              <td>Grup Tab</td>
+              <td>Tab Vertikal</td>
+              <td>Grup Tab</td>
+              <td>Grup Terbatas</td>
+              <td>Ya (Native)</td>
+              <td>Ya (Native)</td>
+            </tr>
+            <tr class="highlight">
+              <td><strong>Ad &amp; Tracker Blocker Bawaan</strong></td>
+              <td><span class="badge-yes">Ya</span> (Kurowser Shields ON)</td>
+              <td>Ya (Shields)</td>
+              <td>Tracking Basic</td>
+              <td>Ekstensi Terpisah</td>
+              <td>ETP Standard</td>
+              <td>Ekstensi uBlock</td>
+              <td>Ekstensi uBlock</td>
+            </tr>
+            <tr class="highlight">
+              <td><strong>Batas Tab Hidup (LRU RAM Cap)</strong></td>
+              <td><span class="badge-yes">Ya</span> (2–4 Tab Ketat + Sleep)</td>
+              <td>Memory Saver</td>
+              <td>Sleeping Tabs</td>
+              <td>Memory Saver</td>
+              <td>Auto Unload</td>
+              <td>Tab Unload</td>
+              <td>Tidur Otomatis</td>
+            </tr>
+            <tr class="highlight">
+              <td><strong>Zero Localhost UI Isolation</strong></td>
+              <td><span class="badge-yes">Ya</span> (<code>kurowser://</code> COM)</td>
+              <td><code>chrome://</code></td>
+              <td><code>edge://</code></td>
+              <td><code>chrome://</code></td>
+              <td><code>about:</code></td>
+              <td><code>about:</code></td>
+              <td>Skema Internal</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="container section" id="unduh">
+      <div class="sec-head">
+        <div class="sec-tag">Pusat Unduhan · v1.0.0</div>
+        <h2>Pilih Format Unduhan Windows x64</h2>
+        <p>Tersedia installer native tanpa UAC untuk pemasangan lengkap di Start Menu &amp; Apps, atau versi portable satu file siap jalan.</p>
+      </div>
+
+      <div class="dl-grid">
+        <article class="dl-card featured">
+          <div class="dl-top">
+            <div>
+              <h3 style="margin: 0; font-size: 20px;">Kurowser Installer (Disarankan)</h3>
+              <span style="color: var(--muted); font-size: 13px;">KurowserSetup.exe · <span id="setup-size">2.58 MiB (2,709,504 bytes)</span></span>
+            </div>
+            <span class="dl-tag">Windows Installer</span>
+          </div>
+          <ul class="dl-list">
+            <li>Pemasangan per-user ke <code>%LOCALAPPDATA%\Programs\Kurowser</code> tanpa prompt UAC.</li>
+            <li>Membuat shortcut Start Menu, Desktop (opsional), dan dukungan run via <code>Win+R</code> (<code>kurowser</code>).</li>
+            <li>Terdaftar rapi di <strong>Windows Apps &amp; Features</strong> dengan uninstaller bawaan.</li>
+          </ul>
+          <a class="btn btn-primary btn-lg" id="card-installer-btn" href="https://github.com/devkecelup/kurowser/releases/download/v1.0.0/KurowserSetup.exe">
+            Unduh KurowserSetup.exe
+          </a>
+          <div class="hash-box">
+            <span class="hash-text" id="sha-setup">SHA-256: <span data-hash="setup">8710E1823E4EB63165C6FEEE321E7FE5B2287EE61A2771A562527250D1D1E1ED</span></span>
+            <button type="button" class="btn btn-sm" data-copy-target="setup">Salin SHA-256</button>
+          </div>
+        </article>
+
+        <article class="dl-card">
+          <div class="dl-top">
+            <div>
+              <h3 style="margin: 0; font-size: 20px;">Kurowser Portable</h3>
+              <span style="color: var(--muted); font-size: 13px;">kurowser.exe · <span id="portable-size">1.69 MiB (1,773,056 bytes)</span></span>
+            </div>
+            <span class="dl-tag" style="background: rgba(255,255,255,0.08); color: var(--text);">Standalone EXE</span>
+          </div>
+          <ul class="dl-list">
+            <li>Satu file executable <strong>1.77 MB</strong> — tinggal klik dua kali untuk langsung dijalankan.</li>
+            <li>Cocok disimpan di flashdisk atau folder proyek tanpa memodifikasi shortcut atau registry.</li>
+            <li>Profil &amp; folder tab tetap tersimpan aman di <code>%LOCALAPPDATA%\Kurowser</code>.</li>
+          </ul>
+          <a class="btn btn-lg" id="card-portable-btn" href="https://github.com/devkecelup/kurowser/releases/download/v1.0.0/kurowser.exe">
+            Unduh kurowser.exe (Portable)
+          </a>
+          <div class="hash-box">
+            <span class="hash-text" id="sha-portable">SHA-256: <span data-hash="portable">882D719682289927423960EB7AE685A04DA3E5D33BE4BE352BA265C0B3C96189</span></span>
+            <button type="button" class="btn btn-sm" data-copy-target="portable">Salin SHA-256</button>
+          </div>
+        </article>
+      </div>
+
+      <div class="code-block" aria-label="Perintah verifikasi SHA-256 di PowerShell">
+        # Verifikasi integritas installer via PowerShell (Windows 10/11):<br />
+        Get-FileHash .\KurowserSetup.exe -Algorithm SHA256
+      </div>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <div>
+      <strong>Kurowser v1.0.0</strong> — Dibuat dengan Rust + Native Win32 + WebView2 · Lisensi MIT
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/devkecelup/kurowser" target="_blank" rel="noopener">GitHub Source Code</a>
+      <a href="https://github.com/devkecelup/kurowser/releases" target="_blank" rel="noopener">Releases</a>
+      <a href="https://github.com/devkecelup/kurowser/blob/main/SECURITY.md" target="_blank" rel="noopener">Security Policy</a>
+      <a href="https://github.com/devkecelup/kurowser-web" target="_blank" rel="noopener">Repo Website</a>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+# OS & Editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+.vscode/
+.idea/
+.agents/
+AGENTS.md
