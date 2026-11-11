@@ -81,112 +81,114 @@
   </header>
 
   <main id="main">
-    <section class="container hero" id="top">
-      <div class="hero-copy">
-        <p class="release-line">v1.0.0 <span aria-hidden="true">/</span> Windows 10/11 x64 <span aria-hidden="true">/</span> Rilis stabil</p>
-        <h1>Browser Windows <span class="accent-word">ultra-ringan</span> untuk fokus dan hemat RAM.</h1>
-        <p class="hero-lead">
-          Dibangun dengan <strong>Rust, Native Win32, dan WebView2</strong>. Tab folder vertikal, <strong>Kurowser Shields</strong>, batas RAM LRU, dan halaman internal lewat <code>kurowser://</code> tanpa server <code>localhost</code>.
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary btn-lg" id="hero-installer-btn" href="https://github.com/devkecelup/kurowser/releases/download/v1.0.0/KurowserSetup.exe">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
-            Unduh installer
-          </a>
-          <a class="btn btn-lg" id="hero-portable-btn" href="https://github.com/devkecelup/kurowser/releases/download/v1.0.0/kurowser.exe">Unduh versi portable (1.77 MB)</a>
-        </div>
-        <ul class="hero-facts">
-          <li>Tanpa hak admin / UAC</li>
-          <li>MIT open source</li>
-          <li><a href="#unduh">SHA-256 dan opsi instalasi</a></li>
-        </ul>
-      </div>
-
-      <div class="hero-product">
-        <div class="mockup-frame" role="group" aria-label="Pratinjau antarmuka Kurowser" inert>
-          <div class="mockup-toolbar">
-            <div class="mock-addr">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-              <span id="mock-url">kurowser://start</span>
-            </div>
-            <button type="button" class="mock-shield" id="mock-shield-toggle" aria-pressed="true" title="Uji toggle Kurowser Shields">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              <span id="mock-shield-label">Shields ON · 0</span>
-            </button>
+    <div class="hero-band">
+      <section class="container hero" id="top">
+        <div class="hero-copy">
+          <p class="release-line">v1.0.0 <span aria-hidden="true">/</span> Windows 10/11 x64 <span aria-hidden="true">/</span> Rilis stabil</p>
+          <h1>Browser Windows <span class="accent-word">ultra-ringan</span> untuk fokus dan hemat RAM.</h1>
+          <p class="hero-lead">
+            Dibangun dengan <strong>Rust, Native Win32, dan WebView2</strong>. Tab folder vertikal, <strong>Kurowser Shields</strong>, batas RAM LRU, dan halaman internal lewat <code>kurowser://</code> tanpa server <code>localhost</code>.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" id="hero-installer-btn" href="https://github.com/devkecelup/kurowser/releases/download/v1.0.0/KurowserSetup.exe">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+              Unduh installer
+            </a>
+            <a class="btn btn-lg" id="hero-portable-btn" href="https://github.com/devkecelup/kurowser/releases/download/v1.0.0/kurowser.exe">Unduh versi portable (1.77 MB)</a>
           </div>
+          <ul class="hero-facts">
+            <li>Tanpa hak admin / UAC</li>
+            <li>MIT open source</li>
+            <li><a href="#unduh">SHA-256 dan opsi instalasi</a></li>
+          </ul>
+        </div>
 
-          <div class="mockup-body">
-            <aside class="mock-sidebar" aria-label="Sidebar tab pratinjau">
-              <div class="mock-sidebar-actions">
-                <button type="button" class="mock-pill" id="mock-newtab">+ Tab baru</button>
-                <button type="button" class="mock-pill" id="mock-toggle-all" title="Lipat atau buka folder">Folder</button>
+        <div class="hero-product">
+          <div class="mockup-frame" role="group" aria-label="Pratinjau antarmuka Kurowser" inert>
+            <div class="mockup-toolbar">
+              <div class="mock-addr">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <span id="mock-url">kurowser://start</span>
               </div>
-
-              <button type="button" class="mock-folder" id="mock-folder-btn" aria-expanded="true" aria-controls="mock-folder-children">
-                <span><span id="mock-folder-arrow" aria-hidden="true">▾</span> Workspace Ku</span>
-                <span class="mock-folder-count" id="mock-folder-count">2</span>
+              <button type="button" class="mock-shield" id="mock-shield-toggle" aria-pressed="true" title="Uji toggle Kurowser Shields">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <span id="mock-shield-label">Shields ON · 0</span>
               </button>
+            </div>
 
-              <div class="mock-folder-children" id="mock-folder-children">
-                <button type="button" class="mock-tab is-active" data-url="kurowser://start" data-shields="0" aria-current="page">kurowser://start</button>
-                <button type="button" class="mock-tab" data-url="https://github.com/devkecelup/kurowser" data-shields="2">GitHub · Kurowser</button>
-              </div>
+            <div class="mockup-body">
+              <aside class="mock-sidebar" aria-label="Sidebar tab pratinjau">
+                <div class="mock-sidebar-actions">
+                  <button type="button" class="mock-pill" id="mock-newtab">+ Tab baru</button>
+                  <button type="button" class="mock-pill" id="mock-toggle-all" title="Lipat atau buka folder">Folder</button>
+                </div>
 
-              <button type="button" class="mock-tab" data-url="https://duckduckgo.com" data-shields="4">DuckDuckGo</button>
-              <button type="button" class="mock-tab" data-url="kurowser://settings" data-shields="0">Pengaturan</button>
+                <button type="button" class="mock-folder" id="mock-folder-btn" aria-expanded="true" aria-controls="mock-folder-children">
+                  <span><span id="mock-folder-arrow" aria-hidden="true">▾</span> Workspace Ku</span>
+                  <span class="mock-folder-count" id="mock-folder-count">2</span>
+                </button>
 
-              <div class="mock-sidebar-foot">
-                <span>3 tab aktif</span>
-                <span>Batas LRU 3</span>
-              </div>
-            </aside>
+                <div class="mock-folder-children" id="mock-folder-children">
+                  <button type="button" class="mock-tab is-active" data-url="kurowser://start" data-shields="0" aria-current="page">kurowser://start</button>
+                  <button type="button" class="mock-tab" data-url="https://github.com/devkecelup/kurowser" data-shields="2">GitHub · Kurowser</button>
+                </div>
 
-            <div class="mock-page">
-              <div class="mock-logo-row">
-                <img src="assets/kurowser_logo.png" width="32" height="32" alt="" />
-                <span>Kurowser</span>
+                <button type="button" class="mock-tab" data-url="https://duckduckgo.com" data-shields="4">DuckDuckGo</button>
+                <button type="button" class="mock-tab" data-url="kurowser://settings" data-shields="0">Pengaturan</button>
+
+                <div class="mock-sidebar-foot">
+                  <span>3 tab aktif</span>
+                  <span>Batas LRU 3</span>
+                </div>
+              </aside>
+
+              <div class="mock-page">
+                <div class="mock-logo-row">
+                  <img src="assets/kurowser_logo.png" width="32" height="32" alt="" />
+                  <span>Kurowser</span>
+                </div>
+                <div class="mock-search" id="mock-search-preview">Cari di web atau ketik URL</div>
+                <div class="mock-links">
+                  <button type="button" class="mock-link">GitHub</button>
+                  <button type="button" class="mock-link">YouTube</button>
+                  <button type="button" class="mock-link">Docs</button>
+                </div>
+                <p class="mock-hint" id="mock-live-hint">Klik folder <strong>Workspace Ku</strong> atau tombol <strong>Shields</strong> di atas.</p>
               </div>
-              <div class="mock-search" id="mock-search-preview">Cari di web atau ketik URL</div>
-              <div class="mock-links">
-                <button type="button" class="mock-link">GitHub</button>
-                <button type="button" class="mock-link">YouTube</button>
-                <button type="button" class="mock-link">Docs</button>
-              </div>
-              <p class="mock-hint" id="mock-live-hint">Klik folder <strong>Workspace Ku</strong> atau tombol <strong>Shields</strong> di atas.</p>
             </div>
           </div>
+          <p class="mock-caption mock-caption-live">Pratinjau interaktif. Klik folder, tab, atau tombol Shields.</p>
+          <noscript>
+            <p class="mock-caption">Pratinjau statis. JavaScript diperlukan untuk mencoba folder dan Shields.</p>
+          </noscript>
         </div>
-        <p class="mock-caption mock-caption-live">Pratinjau interaktif. Klik folder, tab, atau tombol Shields.</p>
-        <noscript>
-          <p class="mock-caption">Pratinjau statis. JavaScript diperlukan untuk mencoba folder dan Shields.</p>
-        </noscript>
-      </div>
-    </section>
+      </section>
 
-    <section class="container measure" aria-labelledby="measure-title">
-      <div class="measure-head">
-        <h2 id="measure-title">Hasil ukur di Windows 11 x64</h2>
-        <p>Diambil dengan <code>measure_memory.ps1</code> pada build v1.0.0.</p>
-      </div>
-      <dl class="measure-ledger">
-        <div class="measure-item">
-          <dt>Binary portable</dt>
-          <dd><span class="measure-num">1.77</span> <span class="measure-unit">MB</span><span class="measure-note">kurowser.exe</span></dd>
+      <section class="container measure" aria-labelledby="measure-title">
+        <div class="measure-head">
+          <h2 id="measure-title">Hasil ukur di Windows 11 x64</h2>
+          <p>Diambil dengan <code>measure_memory.ps1</code> pada build v1.0.0.</p>
         </div>
-        <div class="measure-item">
-          <dt>Host RAM</dt>
-          <dd><span class="measure-num">7.5</span> <span class="measure-unit">MB</span><span class="measure-note">Rust + Win32</span></dd>
-        </div>
-        <div class="measure-item">
-          <dt>Private RAM saat start</dt>
-          <dd><span class="measure-num">171.7</span> <span class="measure-unit">MB</span><span class="measure-note">termasuk WebView2</span></dd>
-        </div>
-        <div class="measure-item">
-          <dt>Listener localhost</dt>
-          <dd><span class="measure-num">0</span> <span class="measure-unit">port</span><span class="measure-note">skema kurowser://</span></dd>
-        </div>
-      </dl>
-    </section>
+        <dl class="measure-ledger">
+          <div class="measure-item">
+            <dt>Binary portable</dt>
+            <dd><span class="measure-num">1.77</span> <span class="measure-unit">MB</span><span class="measure-note">kurowser.exe</span></dd>
+          </div>
+          <div class="measure-item">
+            <dt>Host RAM</dt>
+            <dd><span class="measure-num">7.5</span> <span class="measure-unit">MB</span><span class="measure-note">Rust + Win32</span></dd>
+          </div>
+          <div class="measure-item">
+            <dt>Private RAM saat start</dt>
+            <dd><span class="measure-num">171.7</span> <span class="measure-unit">MB</span><span class="measure-note">termasuk WebView2</span></dd>
+          </div>
+          <div class="measure-item">
+            <dt>Listener localhost</dt>
+            <dd><span class="measure-num">0</span> <span class="measure-unit">port</span><span class="measure-note">skema kurowser://</span></dd>
+          </div>
+        </dl>
+      </section>
+    </div>
 
     <section class="container section" id="fitur">
       <header class="section-head">
@@ -197,11 +199,13 @@
 
       <div class="feature-layout">
         <article class="feature-main">
-          <p class="feature-index">01</p>
-          <h3>Tab folder di sidebar</h3>
-          <p>
-            Kelompokkan tab ke folder berwarna, ubah nama langsung di sidebar, pindahkan antar folder dengan drag-and-drop, buka context menu, dan lipat folder yang tidak sedang dipakai. Isi folder disimpan ke <code>folders.json</code> dan baru dimuat saat diklik, jadi 0 MB RAM sampai folder dibuka.
-          </p>
+          <div class="feature-main-copy">
+            <p class="feature-index">01</p>
+            <h3>Tab folder di sidebar</h3>
+            <p>
+              Kelompokkan tab ke folder berwarna, ubah nama langsung di sidebar, pindahkan antar folder dengan drag-and-drop, buka context menu, dan lipat folder yang tidak sedang dipakai. Isi folder disimpan ke <code>folders.json</code> dan baru dimuat saat diklik, jadi 0 MB RAM sampai folder dibuka.
+            </p>
+          </div>
 
           <div class="folder-sketch" role="img" aria-label="Diagram folder Workspace Ku berisi dua tab, ditambah dua tab lain di sidebar.">
             <div class="sketch-row is-folder">
