@@ -1,13 +1,13 @@
 (() => {
   const RELEASE_META = {
-    version: "v1.1.0",
+    version: "v1.1.1",
     setup: {
-      sizeLabel: "2.73 MiB (2,859,008 bytes)",
-      sha256: "D5B85CF722FB38513EF9A9048E43B98C9E140824E60AD06524D12D650C73948D",
+      sizeLabel: "2.73 MiB (2,866,176 bytes)",
+      sha256: "862EDEC815C274D9FF2C9CABDD584DE9B1FDBA3E1231ACC642D4A5A0A4D195A6",
     },
     portable: {
-      sizeLabel: "1.83 MiB (1,916,416 bytes)",
-      sha256: "182D3861B976C2FA32BA9D45959C3B17B07257DEF14B81F9C760BEB8B7D7AA0C",
+      sizeLabel: "1.83 MiB (1,923,072 bytes)",
+      sha256: "E202BFB6BDAA99DBDF45D71320ABFB3D67A5E219D4F28951D512C654DE16AA1B",
     },
   };
 
@@ -93,9 +93,13 @@
     });
   }
 
-  // Interactive browser preview (matches sidebar search + top-right window captions + rail mode)
+  // Interactive browser preview (matches 50px slim rail default + hover-to-expand 240px + pin toggle)
+  const mockSidebar = document.getElementById("mock-sidebar");
   const collapseBtn = document.getElementById("mock-collapse");
   const railSearchBtn = document.getElementById("mock-rail-search");
+  const railShieldBtn = document.getElementById("mock-rail-shield");
+  const railSettingsBtn = document.getElementById("mock-rail-settings");
+  const railNewTabBtn = document.getElementById("mock-rail-newtab");
   const backBtn = document.getElementById("mock-back");
   const fwdBtn = document.getElementById("mock-fwd");
   const reloadBtn = document.getElementById("mock-reload");
@@ -115,7 +119,11 @@
   const linkTiles = Array.from(document.querySelectorAll(".mock-link"));
   const tabs = Array.from(document.querySelectorAll(".mock-tab"));
 
-  let sidebarCollapsed = false;
+  let sidebarPinned = false;
+  let sidebarHoverOpen = false;
+  let sidebarHoldOpen = false;
+  let hoverEnterTimer = 0;
+  let hoverLeaveTimer = 0;
   let folderCollapsed = false;
   let shieldsEnabled = true;
   let activeState = { url: "kurowser://start", title: "Kurowser Start", blocked: 0 };
@@ -140,15 +148,21 @@
   }
 
   function renderShieldState() {
-    if (!shieldToggle || !shieldLabel) return;
-    shieldToggle.setAttribute("aria-pressed", String(shieldsEnabled));
     const isInternal = activeState.url.startsWith("kurowser://");
-    if (shieldsEnabled) {
-      shieldToggle.classList.remove("is-off");
-      shieldLabel.textContent = isInternal || activeState.blocked === 0 ? "ON" : `ON · ${activeState.blocked}`;
-    } else {
-      shieldToggle.classList.add("is-off");
-      shieldLabel.textContent = "OFF";
+    if (shieldToggle && shieldLabel) {
+      shieldToggle.setAttribute("aria-pressed", String(shieldsEnabled));
+      if (shieldsEnabled) {
+        shieldToggle.classList.remove("is-off");
+        shieldLabel.textContent = isInternal || activeState.blocked === 0 ? "ON" : `ON · ${activeState.blocked}`;
+      } else {
+        shieldToggle.classList.add("is-off");
+        shieldLabel.textContent = "OFF";
+      }
+    }
+    if (railShieldBtn) {
+      railShieldBtn.setAttribute("aria-pressed", String(shieldsEnabled));
+      railShieldBtn.classList.toggle("is-active", shieldsEnabled);
+      railShieldBtn.classList.toggle("is-off", !shieldsEnabled);
     }
   }
 
@@ -173,14 +187,30 @@
     renderShieldState();
   }
 
-  function setSidebarCollapsed(collapsed) {
-    sidebarCollapsed = collapsed;
-    if (mockupFrame) mockupFrame.classList.toggle("is-collapsed", collapsed);
-    if (collapseBtn) collapseBtn.setAttribute("aria-expanded", String(!collapsed));
-    if (collapsed) {
-      setHintParts("Sidebar dilipat ke ", "mode rail", " dengan tombol jendela tetap di pojok kanan atas.");
-    } else {
-      setHintParts("Sidebar ", "terbuka penuh", " bersama bilah pencarian dan kontrol Shields.");
+  function isSidebarExpanded() {
+    return sidebarPinned || sidebarHoverOpen || sidebarHoldOpen;
+  }
+
+  function syncSidebarLayout(announceHint) {
+    const expanded = isSidebarExpanded();
+    if (mockupFrame) mockupFrame.classList.toggle("is-collapsed", !expanded);
+    if (collapseBtn) {
+      collapseBtn.setAttribute("aria-expanded", String(expanded));
+      collapseBtn.setAttribute("aria-pressed", String(sidebarPinned));
+      collapseBtn.classList.toggle("is-pinned", sidebarPinned);
+      collapseBtn.setAttribute(
+        "title",
+        sidebarPinned ? "Lepas kunci sidebar ke mode rail 50px (Ctrl+B)" : "Sematkan sidebar tetap terbuka (Ctrl+B)"
+      );
+    }
+    if (announceHint) {
+      if (sidebarPinned) {
+        setHintParts("Sidebar disematkan ", "terbuka penuh", " (240px di desktop) sampai kunci dilepas.");
+      } else if (!expanded) {
+        setHintParts("Sidebar kembali menyusut ke ", "rail 50px", " dan melebar otomatis saat kursor masuk.");
+      } else {
+        setHintParts("Sidebar melebar sementara untuk ", "pencarian dan navigasi", ".");
+      }
     }
   }
 
@@ -196,8 +226,73 @@
     }
   }
 
-  if (collapseBtn) collapseBtn.addEventListener("click", () => setSidebarCollapsed(!sidebarCollapsed));
-  if (railSearchBtn) railSearchBtn.addEventListener("click", () => setSidebarCollapsed(false));
+  function openNewTabPreview() {
+    syncActiveState({ url: "kurowser://start", title: "Kurowser Start", blocked: 0 }, true);
+    if (searchPreviewEl) searchPreviewEl.textContent = "Ketik goo untuk google.com, atau cari di web";
+    setHintParts("Tab baru dibuka ke ", "kurowser://start", " langsung dari skema internal.");
+  }
+
+  function toggleShieldsPreview() {
+    shieldsEnabled = !shieldsEnabled;
+    renderShieldState();
+    if (shieldsEnabled) {
+      setHintParts("", "Kurowser Shields aktif.", " Domain iklan, pelacak, dan payload iklan YouTube diblokir.");
+    } else {
+      setHintParts("", "Kurowser Shields dijeda.", " Bisa dinyalakan kembali per situs atau global.");
+    }
+  }
+
+  if (collapseBtn) {
+    collapseBtn.addEventListener("click", () => {
+      window.clearTimeout(hoverEnterTimer);
+      window.clearTimeout(hoverLeaveTimer);
+      sidebarPinned = !sidebarPinned;
+      if (!sidebarPinned) {
+        sidebarHoverOpen = false;
+        sidebarHoldOpen = false;
+      }
+      syncSidebarLayout(true);
+    });
+  }
+
+  if (railSearchBtn) {
+    railSearchBtn.addEventListener("click", () => {
+      window.clearTimeout(hoverLeaveTimer);
+      sidebarHoldOpen = true;
+      syncSidebarLayout(true);
+    });
+  }
+
+  const pointerHoverQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+  if (mockSidebar) {
+    mockSidebar.addEventListener("mouseenter", () => {
+      if (!pointerHoverQuery.matches || sidebarPinned) return;
+      window.clearTimeout(hoverLeaveTimer);
+      if (!sidebarHoverOpen) {
+        hoverEnterTimer = window.setTimeout(() => {
+          sidebarHoverOpen = true;
+          syncSidebarLayout(false);
+        }, 110);
+      }
+    });
+
+    mockSidebar.addEventListener("mouseleave", () => {
+      window.clearTimeout(hoverEnterTimer);
+      if (sidebarPinned) return;
+      hoverLeaveTimer = window.setTimeout(() => {
+        sidebarHoverOpen = false;
+        sidebarHoldOpen = false;
+        syncSidebarLayout(false);
+      }, 180);
+    });
+
+    mockSidebar.addEventListener("focusout", (event) => {
+      if (sidebarPinned || sidebarHoverOpen || !sidebarHoldOpen) return;
+      if (event.relatedTarget && mockSidebar.contains(event.relatedTarget)) return;
+      sidebarHoldOpen = false;
+      syncSidebarLayout(false);
+    });
+  }
 
   if (backBtn) {
     backBtn.addEventListener("click", () => {
@@ -233,12 +328,14 @@
 
   if (folderBtn) folderBtn.addEventListener("click", toggleFolder);
   if (toggleAllBtn) toggleAllBtn.addEventListener("click", toggleFolder);
-
-  if (newTabBtn) {
-    newTabBtn.addEventListener("click", () => {
-      syncActiveState({ url: "kurowser://start", title: "Kurowser Start", blocked: 0 }, true);
-      if (searchPreviewEl) searchPreviewEl.textContent = "Ketik goo untuk google.com, atau cari di web";
-      setHintParts("Tab baru dibuka ke ", "kurowser://start", " langsung dari skema internal.");
+  if (newTabBtn) newTabBtn.addEventListener("click", openNewTabPreview);
+  if (railNewTabBtn) railNewTabBtn.addEventListener("click", openNewTabPreview);
+  if (shieldToggle) shieldToggle.addEventListener("click", toggleShieldsPreview);
+  if (railShieldBtn) railShieldBtn.addEventListener("click", toggleShieldsPreview);
+  if (railSettingsBtn) {
+    railSettingsBtn.addEventListener("click", () => {
+      syncActiveState({ url: "kurowser://settings", title: "Pengaturan", blocked: 0 }, true);
+      setHintParts("Membuka ", "kurowser://settings", " untuk mengatur tema, batas RAM LRU, dan mode hover sidebar.");
     });
   }
 
@@ -258,18 +355,6 @@
     });
   });
 
-  if (shieldToggle) {
-    shieldToggle.addEventListener("click", () => {
-      shieldsEnabled = !shieldsEnabled;
-      renderShieldState();
-      if (shieldsEnabled) {
-        setHintParts("", "Kurowser Shields aktif.", " Domain iklan, pelacak, dan payload iklan YouTube diblokir.");
-      } else {
-        setHintParts("", "Kurowser Shields dijeda.", " Bisa dinyalakan kembali per situs atau global.");
-      }
-    });
-  }
-
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
       const url = tab.getAttribute("data-url") || "kurowser://start";
@@ -287,9 +372,10 @@
     });
   }
 
+  syncSidebarLayout(false);
   syncActiveState(activeState, false);
 
-  // Honest comparison panel: baseline measured memory, exact v1.1.0 release sizes, and factual 7-browser architecture
+  // Honest comparison panel: baseline measured memory, exact v1.1.1 release sizes, and factual 7-browser architecture
   const METRIC_PANELS = {
     mem: {
       kind: "bars",
@@ -307,11 +393,11 @@
     },
     size: {
       kind: "bars",
-      title: "Ukuran paket rilis resmi Kurowser v1.1.0 (MB)",
+      title: "Ukuran paket rilis resmi Kurowser v1.1.1 (MB)",
       sub: "Ukuran aktual berkas executable Windows x64 tanpa paket browser engine terbundel.",
       max: 4,
       unit: "MB",
-      note: "Portable kurowser.exe (1.83 MB / 1,916,416 bytes) dan installer KurowserSetup.exe (2.73 MB / 2,859,008 bytes) berukuran kecil karena memanfaatkan Microsoft Edge WebView2 Runtime yang sudah tersedia di Windows 10 dan Windows 11.",
+      note: "Portable kurowser.exe (1.83 MB / 1,923,072 bytes) dan installer KurowserSetup.exe (2.73 MB / 2,866,176 bytes) berukuran kecil karena memanfaatkan Microsoft Edge WebView2 Runtime yang sudah tersedia di Windows 10 dan Windows 11.",
       rows: [
         { name: "kurowser.exe (Portabel)", val: 1.83, kurowser: true },
         { name: "KurowserSetup.exe (Installer)", val: 2.73, kurowser: true },
@@ -324,9 +410,9 @@
       note: "Untuk detail perbandingan lengkap antar fitur, lihat tabel 7 browser di bawah.",
       items: [
         {
-          name: "Kurowser v1.1.0",
+          name: "Kurowser v1.1.1",
           tag: "WebView2 OS · Rust Win32",
-          detail: "Sidebar 280px/72px + Tab Folders, tombol kanan atas, Kurowser Shields ON bawaan, LRU Cap 2 sampai 4 renderer, auto-updater SHA-256, dan skema kurowser:// tanpa localhost.",
+          detail: "Rail 50px default (melebar ke 240px saat hover atau pin) + Tab Folders, tombol kanan atas, Kurowser Shields ON bawaan, LRU Cap 2 sampai 4 renderer, auto-updater SHA-256, dan skema kurowser:// tanpa localhost.",
           kurowser: true,
         },
         {

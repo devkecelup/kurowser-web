@@ -518,23 +518,30 @@ code {
 }
 
 .mockup-shell {
-  display: grid;
-  grid-template-columns: 224px minmax(0, 1fr);
-  min-height: 364px;
-}
-
-.mockup-frame.is-collapsed .mockup-shell {
-  grid-template-columns: 56px minmax(0, 1fr);
+  display: flex;
+  align-items: stretch;
+  min-height: 368px;
 }
 
 .mock-sidebar {
   display: flex;
   flex-direction: column;
+  flex: 0 0 auto;
+  width: 224px;
   gap: 6px;
   padding: 10px;
+  overflow: hidden;
   background: var(--chrome);
   font-size: 12px;
   min-width: 0;
+  transition: width 0.22s cubic-bezier(0.22, 1, 0.36, 1), padding 0.22s ease;
+}
+
+.mockup-frame.is-collapsed .mock-sidebar {
+  width: 50px;
+  align-items: center;
+  padding: 9px 7px;
+  gap: 5px;
 }
 
 .mock-sidebar-top {
@@ -586,6 +593,12 @@ code {
   border-color: var(--line);
   background: var(--surface-2);
   color: var(--ink);
+}
+
+.mock-nav-btn.is-pinned {
+  border-color: var(--brand-line);
+  background: var(--brand-tint);
+  color: var(--brand-text);
 }
 
 .mock-nav-btn:disabled {
@@ -652,14 +665,74 @@ code {
   display: none;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 34px;
+  width: 34px;
+  height: 32px;
   margin-inline: auto;
   padding: 0;
   border: 1px solid var(--line-strong);
   border-radius: var(--radius);
   background: var(--surface);
+  color: var(--ink-2);
+}
+
+.mock-rail-search:hover {
+  border-color: var(--brand-line);
+  background: var(--surface-2);
+  color: var(--brand-text);
+}
+
+.mock-rail-divider {
+  display: none;
+  width: 100%;
+  height: 0;
+  margin: 1px 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+.mock-rail-utils {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  margin-top: auto;
+}
+
+.mock-rail-iconbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.mock-rail-iconbtn:hover {
+  border-color: var(--line-strong);
+  background: var(--surface-2);
   color: var(--ink);
+}
+
+.mock-rail-iconbtn.is-active {
+  border-color: var(--brand-line);
+  background: var(--brand-tint);
+  color: var(--brand-text);
+}
+
+.mock-rail-iconbtn.is-off {
+  color: var(--muted);
+}
+
+.mock-rail-plus {
+  border-color: var(--line);
+  background: var(--surface);
 }
 
 .mock-sidebar-actions {
@@ -718,8 +791,13 @@ code {
 .mock-folder-name {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   min-width: 0;
+}
+
+.mock-folder-ico {
+  color: var(--brand-text);
+  flex-shrink: 0;
 }
 
 .mock-folder-count {
@@ -829,7 +907,7 @@ code {
   white-space: nowrap;
 }
 
-/* Collapsed 72px-style Rail Preview */
+/* Collapsed 50px Slim Rail Preview */
 .mockup-frame.is-collapsed .mock-brand,
 .mockup-frame.is-collapsed .mock-nav-btn[data-nav="back"],
 .mockup-frame.is-collapsed .mock-nav-btn[data-nav="fwd"],
@@ -839,40 +917,46 @@ code {
 .mockup-frame.is-collapsed .mock-folder-text,
 .mockup-frame.is-collapsed .mock-folder-count,
 .mockup-frame.is-collapsed .mock-tab-label,
-.mockup-frame.is-collapsed .mock-ram-stat {
+.mockup-frame.is-collapsed .mock-sidebar-foot {
   display: none;
-}
-
-.mockup-frame.is-collapsed .mock-sidebar {
-  align-items: center;
-  padding: 10px 7px;
 }
 
 .mockup-frame.is-collapsed .mock-rail-search {
   display: inline-flex;
 }
 
+.mockup-frame.is-collapsed .mock-rail-divider {
+  display: block;
+}
+
+.mockup-frame.is-collapsed .mock-rail-utils {
+  display: flex;
+}
+
 .mockup-frame.is-collapsed .mock-folder,
-.mockup-frame.is-collapsed .mock-tab,
-.mockup-frame.is-collapsed .mock-trim-btn {
-  width: 36px;
-  padding: 6px;
+.mockup-frame.is-collapsed .mock-tab {
+  width: 32px;
+  min-height: 30px;
+  padding: 4px;
   justify-content: center;
+}
+
+.mockup-frame.is-collapsed #mock-folder-arrow {
+  font-size: 9px;
+  line-height: 1;
 }
 
 .mockup-frame.is-collapsed .mock-folder-children {
   margin-left: 0;
-  padding-left: 0;
-  border-left: 0;
-}
-
-.mockup-frame.is-collapsed .mock-trim-label {
-  display: none;
+  padding-left: 4px;
+  border-left: 2px solid var(--brand-line);
+  gap: 3px;
 }
 
 /* Right Stage with 36px Topbar (Caption Controls Top-Right) + Rounded WebView Frame */
 .mock-stage {
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
   padding: 0 8px 8px 0;
   min-width: 0;
@@ -2072,12 +2156,14 @@ html.js-reveal .reveal:not(.is-visible) {
     width: 100%;
   }
 
-  .mockup-shell,
-  .mockup-frame.is-collapsed .mockup-shell {
-    grid-template-columns: 1fr;
+  .mockup-shell {
+    flex-direction: column;
+    min-height: 0;
   }
 
-  .mock-sidebar {
+  .mock-sidebar,
+  .mockup-frame.is-collapsed .mock-sidebar {
+    width: 100%;
     border-bottom: 1px solid var(--line);
   }
 
@@ -2094,6 +2180,10 @@ html.js-reveal .reveal:not(.is-visible) {
     gap: 6px;
   }
 
+  .mockup-frame.is-collapsed .mock-rail-divider {
+    display: none;
+  }
+
   .mockup-frame.is-collapsed .mock-rail-search {
     margin-inline: 0;
   }
@@ -2103,29 +2193,34 @@ html.js-reveal .reveal:not(.is-visible) {
     flex-wrap: wrap;
     gap: 6px;
     margin: 0;
+    padding-left: 0;
+    border-left: 0;
   }
 
-  .mockup-frame.is-collapsed .mock-sidebar-foot {
+  .mockup-frame.is-collapsed .mock-rail-utils {
+    flex-direction: row;
+    width: auto;
     margin-top: 0;
-    padding-top: 0;
-    border-top: 0;
+    gap: 6px;
   }
 
   .mockup-frame.is-collapsed .mock-folder,
   .mockup-frame.is-collapsed .mock-tab,
-  .mockup-frame.is-collapsed .mock-trim-btn {
+  .mockup-frame.is-collapsed .mock-rail-iconbtn {
     width: 44px;
     height: 44px;
   }
 
   .mockup-frame.is-collapsed .mock-nav-btn,
+  .mockup-frame.is-collapsed .mock-rail-iconbtn:not(.is-active),
   .mockup-frame.is-collapsed .mock-tab:not(.is-active) {
     border-color: var(--line);
     background: var(--surface);
   }
 
   .mock-nav-btn,
-  .mock-rail-search {
+  .mock-rail-search,
+  .mock-rail-iconbtn {
     min-width: 44px;
     min-height: 44px;
   }
@@ -2246,6 +2341,7 @@ html.js-reveal .reveal:not(.is-visible) {
   .mock-shield,
   .mock-nav-btn,
   .mock-rail-search,
+  .mock-rail-iconbtn,
   .mock-trim-btn {
     min-height: 44px;
   }
