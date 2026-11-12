@@ -1,13 +1,13 @@
 (() => {
   const RELEASE_META = {
-    version: "v1.1.3",
+    version: "v1.1.4",
     setup: {
-      sizeLabel: "2.74 MiB (2,871,296 bytes)",
-      sha256: "37BD578A1C766DEC4AD313C6A9F5D9BA9BA46B2B20783E89ACFEF2DB3D7EE692",
+      sizeLabel: "2.79 MiB (2,923,520 bytes)",
+      sha256: "DA1E69CE6AEB515C13AF1D532A8081FB34BF5B8B1D99E8F0013A6F488A0034FB",
     },
     portable: {
-      sizeLabel: "1.84 MiB (1,928,704 bytes)",
-      sha256: "6442A9DA9C047C15D035B71C26CD99C729880DD290DF544DBBB427DE5EBD061B",
+      sizeLabel: "1.89 MiB (1,980,416 bytes)",
+      sha256: "B6F6F3BC9F5BA7A9448B23403CF77EE09088B96F580CC075C2F43CF786C4AE61",
     },
   };
 
@@ -347,7 +347,7 @@
   syncSidebarLayout(false);
   syncActiveState(activeState, false);
 
-  // Honest comparison panel: baseline measured memory, exact v1.1.3 release sizes, and factual 7-browser architecture
+  // Honest comparison panel: baseline measured memory, exact v1.1.4 release sizes, and factual 7-browser architecture
   const METRIC_PANELS = {
     mem: {
       kind: "bars",
@@ -355,7 +355,7 @@
       sub: "Satuan MB Windows (1024 x 1024 byte). Nilai lebih kecil berarti jejak lebih hemat.",
       max: 420,
       unit: "MB",
-      note: "Baseline diukur langsung di Windows memakai measure_memory.ps1 pada sesi bersih kurowser://start (v1.0.0): proses host kurowser.exe memakan 6.47 MB Private (34.86 MB Working Set) dan total pohon bersama 6 sub-proses msedgewebview2 sebesar 185.87 MB Private (386.74 MB Working Set).",
+      note: "Baseline diukur langsung di Windows memakai measure_memory.ps1 pada sesi bersih kurowser://start (v1.0.0): proses host kurowser.exe memakan 6.47 MB Private (34.86 MB Working Set) dan total pohon bersama 6 sub-proses msedgewebview2 sebesar 185.87 MB Private (386.74 MB Working Set). Pada tolok ukur multi-tab v1.1.4 (5 tab + 5 menit idle), pemakaian turun dari 754.83 MB Private (939.79 MB Working Set) menjadi 592.44 MB Private (272.98 MB Working Set).",
       rows: [
         { name: "Host Rust + Win32 (Private)", val: 6.47, kurowser: true },
         { name: "Host Rust + Win32 (Working Set)", val: 34.86, kurowser: true },
@@ -365,14 +365,14 @@
     },
     size: {
       kind: "bars",
-      title: "Ukuran paket rilis resmi Kurowser v1.1.3 (MB)",
+      title: "Ukuran paket rilis resmi Kurowser v1.1.4 (MB)",
       sub: "Ukuran aktual berkas executable Windows x64 tanpa paket browser engine terbundel.",
       max: 4,
       unit: "MB",
-      note: "Portable kurowser.exe (1.84 MB / 1,928,704 bytes) dan installer KurowserSetup.exe (2.74 MB / 2,871,296 bytes) berukuran kecil karena memanfaatkan Microsoft Edge WebView2 Runtime yang sudah tersedia di Windows 10 dan Windows 11.",
+      note: "Portable kurowser.exe (1.89 MB / 1,980,416 bytes) dan installer KurowserSetup.exe (2.79 MB / 2,923,520 bytes) berukuran kecil karena memanfaatkan Microsoft Edge WebView2 Runtime yang sudah tersedia di Windows 10 dan Windows 11.",
       rows: [
-        { name: "kurowser.exe (Portabel)", val: 1.84, kurowser: true },
-        { name: "KurowserSetup.exe (Installer)", val: 2.74, kurowser: true },
+        { name: "kurowser.exe (Portabel)", val: 1.89, kurowser: true },
+        { name: "KurowserSetup.exe (Installer)", val: 2.79, kurowser: true },
       ],
     },
     arch: {
@@ -382,9 +382,9 @@
       note: "Untuk detail perbandingan lengkap antar fitur, lihat tabel 7 browser di bawah.",
       items: [
         {
-          name: "Kurowser v1.1.3",
+          name: "Kurowser v1.1.4",
           tag: "WebView2 OS · Rust Win32",
-          detail: "Bilah pencarian terpusat di topbar 42px (lengkap dengan Shields & bookmark) + rail 50px yang melebar halus ke 240px saat hover atau pin + Tab Folders, LRU Cap 2 sampai 4 renderer, auto-updater SHA-256, dan skema kurowser:// tanpa localhost.",
+          detail: "Bilah pencarian terpusat di topbar 42px (lengkap dengan Shields & bookmark) + rail 50px yang melebar halus ke 240px saat hover atau pin + Tab Folders, LRU Cap 2 sampai 4 renderer, idle tab discard, EmptyWorkingSet, batas heap V8, auto-updater SHA-256, dan skema kurowser:// tanpa localhost.",
           kurowser: true,
         },
         {

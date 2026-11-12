@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kurowser v1.1.3: browser Windows berbasis Rust dan WebView2</title>
+  <title>Kurowser v1.1.4: browser Windows berbasis Rust dan WebView2</title>
   <meta name="description" content="Browser Windows berbasis Rust, Win32 native, dan Microsoft Edge WebView2. Tab Folders, pemblokir iklan Kurowser Shields, batas renderer LRU, serta halaman internal kurowser:// tanpa server localhost." />
   <meta name="theme-color" content="#0f1217" id="theme-color" />
   <link rel="icon" href="assets/kurowser.ico" sizes="any" />
@@ -71,7 +71,7 @@
         </a>
 
         <a class="btn btn-primary btn-sm header-download" href="#unduh">
-          <span class="label-long">Unduh v1.1.3</span>
+          <span class="label-long">Unduh v1.1.4</span>
           <span class="label-short">Unduh</span>
         </a>
 
@@ -87,17 +87,17 @@
     <div class="hero-band">
       <section class="container hero" id="top">
         <div class="hero-copy reveal reveal-hero">
-          <p class="release-line">v1.1.3 <span aria-hidden="true">/</span> Windows 10 &amp; 11 x64 <span aria-hidden="true">/</span> Graphite &amp; Paper</p>
+          <p class="release-line">v1.1.4 <span aria-hidden="true">/</span> Windows 10 &amp; 11 x64 <span aria-hidden="true">/</span> Graphite &amp; Paper</p>
           <h1>Browser Windows. <span class="accent-word">Ringan.</span> Fokus.</h1>
           <p class="hero-lead">
             Rust + Win32 asli, engine WebView2 bawaan Windows. Bilah pencarian di tengah topbar, rail 50px yang melebar halus saat hover, ad blocker aktif, auto-update SHA-256, 0 port localhost.
           </p>
           <div class="hero-actions">
-            <a class="btn btn-primary btn-lg" id="hero-installer-btn" href="https://github.com/devkecelup/kurowser/releases/download/v1.1.3/KurowserSetup.exe">
+            <a class="btn btn-primary btn-lg" id="hero-installer-btn" href="https://github.com/devkecelup/kurowser/releases/download/v1.1.4/KurowserSetup.exe">
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
-              Unduh installer (2.74 MB)
+              Unduh installer (2.79 MB)
             </a>
-            <a class="btn btn-lg" id="hero-portable-btn" href="https://github.com/devkecelup/kurowser/releases/download/v1.1.3/kurowser.exe">Unduh versi portabel (1.84 MB)</a>
+            <a class="btn btn-lg" id="hero-portable-btn" href="https://github.com/devkecelup/kurowser/releases/download/v1.1.4/kurowser.exe">Unduh versi portabel (1.89 MB)</a>
           </div>
           <ul class="hero-facts">
             <li>Tanpa hak admin / UAC</li>
@@ -227,7 +227,7 @@
               </div>
             </div>
           </div>
-          <p class="mock-caption mock-caption-live">Pratinjau interaktif Kurowser v1.1.3. Pencarian di tengah topbar dengan rail 50px hover halus.</p>
+          <p class="mock-caption mock-caption-live">Pratinjau interaktif Kurowser v1.1.4. Pencarian di tengah topbar dengan rail 50px hover halus.</p>
           <noscript>
             <p class="mock-caption">Pratinjau statis. Aktifkan JavaScript untuk mencoba kontrol sidebar, folder, dan Shields.</p>
           </noscript>
@@ -237,12 +237,12 @@
       <section class="container measure reveal" aria-labelledby="measure-title">
         <div class="measure-head">
           <h2 id="measure-title">Hasil ukur di Windows x64</h2>
-          <p>Paket rilis v1.1.3 (<code>1.84 MB</code>); baseline memori diambil dengan <code>measure_memory.ps1</code> pada <code>kurowser://start</code> (v1.0.0).</p>
+          <p>Paket rilis v1.1.4 (<code>1.89 MB</code>); baseline memori diambil dengan <code>measure_memory.ps1</code> pada <code>kurowser://start</code> (v1.0.0).</p>
         </div>
         <dl class="measure-ledger">
           <div class="measure-item">
             <dt>Binary portabel</dt>
-            <dd><span class="measure-num">1.84</span> <span class="measure-unit">MB</span><span class="measure-note">kurowser.exe · 1,928,704 bytes</span></dd>
+            <dd><span class="measure-num">1.89</span> <span class="measure-unit">MB</span><span class="measure-note">kurowser.exe · 1,980,416 bytes</span></dd>
           </div>
           <div class="measure-item">
             <dt>Host Rust + Win32</dt>
@@ -304,9 +304,9 @@
 
           <article class="feature-item">
             <p class="feature-index">03</p>
-            <h3>Batas renderer LRU dan Hemat RAM</h3>
+            <h3>Batas renderer LRU, Idle Discard, dan Hemat RAM</h3>
             <p>
-              Hanya mempertahankan 2 sampai 4 renderer WebView2 aktif secara bersamaan (bawaan 3). Tab paling lama tidak dipakai dilepas sambil menyimpan URL dan ikon cache, ditambah tombol <code>Hemat RAM</code> untuk menurunkan level memori renderer aktif.
+              Hanya mempertahankan 2 sampai 4 renderer WebView2 aktif secara bersamaan (bawaan 3). Tab latar belakang yang menganggur dilepas otomatis sambil menyimpan URL, posisi scroll, dan ikon cache, dilengkapi batas heap JavaScript V8, pemangkasan <code>EmptyWorkingSet</code> saat minimize maupun idle, serta tombol <code>Hemat RAM</code>.
             </p>
           </article>
 
@@ -325,7 +325,7 @@
       <header class="section-head">
         <p class="section-index"><span>02</span> Perbandingan</p>
         <h2>Jejak terukur dan perbandingan arsitektur.</h2>
-        <p>Ukuran paket diambil langsung dari berkas rilis Kurowser v1.1.3, sedangkan baseline memori diukur dengan <code>measure_memory.ps1</code> pada v1.0.0. Perbandingan antar browser membahas arsitektur engine dan fitur secara faktual tanpa mencantumkan angka RAM tebakan.</p>
+        <p>Ukuran paket diambil langsung dari berkas rilis Kurowser v1.1.4, sedangkan baseline memori diukur dengan <code>measure_memory.ps1</code> pada v1.0.0. Perbandingan antar browser membahas arsitektur engine dan fitur secara faktual tanpa mencantumkan angka RAM tebakan.</p>
       </header>
 
       <div class="panel">
@@ -357,11 +357,11 @@
 
       <div class="table-wrap" role="region" aria-label="Tabel perbandingan 7 browser" tabindex="0">
         <table>
-          <caption class="sr-only">Perbandingan arsitektur dan fitur antara Kurowser v1.1.3 dengan Brave, Microsoft Edge, Google Chrome, Mozilla Firefox, Zen Browser, dan Arc di Windows.</caption>
+          <caption class="sr-only">Perbandingan arsitektur dan fitur antara Kurowser v1.1.4 dengan Brave, Microsoft Edge, Google Chrome, Mozilla Firefox, Zen Browser, dan Arc di Windows.</caption>
           <thead>
             <tr>
               <th scope="col">Aspek</th>
-              <th scope="col" class="kurowser-col">Kurowser v1.1.3</th>
+              <th scope="col" class="kurowser-col">Kurowser v1.1.4</th>
               <th scope="col">Brave</th>
               <th scope="col">Microsoft Edge</th>
               <th scope="col">Google Chrome</th>
@@ -443,7 +443,7 @@
             </tr>
             <tr>
               <th scope="row">Paket distribusi</th>
-              <td class="kurowser-col">Portabel <strong>1.84 MB</strong> / Setup <strong>2.74 MB</strong></td>
+              <td class="kurowser-col">Portabel <strong>1.89 MB</strong> / Setup <strong>2.79 MB</strong></td>
               <td>Installer + engine penuh</td>
               <td>Bawaan Windows</td>
               <td>Installer + engine penuh</td>
@@ -480,12 +480,12 @@
           <div class="download-action">
             <dl class="file-meta">
               <div><dt>Berkas</dt><dd>KurowserSetup.exe</dd></div>
-              <div><dt>Ukuran</dt><dd><span id="setup-size">2.74 MiB (2,871,296 bytes)</span></dd></div>
+              <div><dt>Ukuran</dt><dd><span id="setup-size">2.79 MiB (2,923,520 bytes)</span></dd></div>
             </dl>
-            <a class="btn btn-primary btn-lg btn-block" id="card-installer-btn" href="https://github.com/devkecelup/kurowser/releases/download/v1.1.3/KurowserSetup.exe">Unduh installer (2.74 MB)</a>
+            <a class="btn btn-primary btn-lg btn-block" id="card-installer-btn" href="https://github.com/devkecelup/kurowser/releases/download/v1.1.4/KurowserSetup.exe">Unduh installer (2.79 MB)</a>
             <div class="hash-box">
               <span class="hash-label">SHA-256</span>
-              <code class="hash-text" id="sha-setup" data-hash="setup">37BD578A1C766DEC4AD313C6A9F5D9BA9BA46B2B20783E89ACFEF2DB3D7EE692</code>
+              <code class="hash-text" id="sha-setup" data-hash="setup">DA1E69CE6AEB515C13AF1D532A8081FB34BF5B8B1D99E8F0013A6F488A0034FB</code>
               <button type="button" class="btn btn-sm" data-copy-target="setup">Salin</button>
             </div>
           </div>
@@ -506,12 +506,12 @@
           <div class="download-action">
             <dl class="file-meta">
               <div><dt>Berkas</dt><dd>kurowser.exe</dd></div>
-              <div><dt>Ukuran</dt><dd><span id="portable-size">1.84 MiB (1,928,704 bytes)</span></dd></div>
+              <div><dt>Ukuran</dt><dd><span id="portable-size">1.89 MiB (1,980,416 bytes)</span></dd></div>
             </dl>
-            <a class="btn btn-lg btn-block" id="card-portable-btn" href="https://github.com/devkecelup/kurowser/releases/download/v1.1.3/kurowser.exe">Unduh versi portabel (1.84 MB)</a>
+            <a class="btn btn-lg btn-block" id="card-portable-btn" href="https://github.com/devkecelup/kurowser/releases/download/v1.1.4/kurowser.exe">Unduh versi portabel (1.89 MB)</a>
             <div class="hash-box">
               <span class="hash-label">SHA-256</span>
-              <code class="hash-text" id="sha-portable" data-hash="portable">6442A9DA9C047C15D035B71C26CD99C729880DD290DF544DBBB427DE5EBD061B</code>
+              <code class="hash-text" id="sha-portable" data-hash="portable">B6F6F3BC9F5BA7A9448B23403CF77EE09088B96F580CC075C2F43CF786C4AE61</code>
               <button type="button" class="btn btn-sm" data-copy-target="portable">Salin</button>
             </div>
           </div>
@@ -532,7 +532,7 @@ Get-FileHash .\kurowser.exe -Algorithm SHA256</code></pre>
       <div class="footer-brand">
         <img src="assets/kurowser_logo.png" width="22" height="22" alt="" />
         <span class="footer-brand-name">Kurowser</span>
-        <span class="footer-brand-version">v1.1.3</span>
+        <span class="footer-brand-version">v1.1.4</span>
         <span class="footer-brand-license">MIT</span>
       </div>
 
@@ -545,8 +545,8 @@ Get-FileHash .\kurowser.exe -Algorithm SHA256</code></pre>
         </div>
         <div class="footer-nav-group">
           <p class="footer-nav-title">Unduh</p>
-          <a href="https://github.com/devkecelup/kurowser/releases/download/v1.1.3/KurowserSetup.exe">Installer (2.74 MB)</a>
-          <a href="https://github.com/devkecelup/kurowser/releases/download/v1.1.3/kurowser.exe">Portabel (1.84 MB)</a>
+          <a href="https://github.com/devkecelup/kurowser/releases/download/v1.1.4/KurowserSetup.exe">Installer (2.79 MB)</a>
+          <a href="https://github.com/devkecelup/kurowser/releases/download/v1.1.4/kurowser.exe">Portabel (1.89 MB)</a>
           <a href="#unduh">SHA-256 &amp; opsi</a>
         </div>
         <div class="footer-nav-group">
